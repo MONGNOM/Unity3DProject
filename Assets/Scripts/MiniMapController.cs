@@ -19,6 +19,8 @@ public class MiniMapController : MonoBehaviour
     [SerializeField]
     private PlayerController Player;
 
+    [SerializeField]
+    private Canvas starcraftUI;
 
     void Update()
     {
@@ -28,8 +30,10 @@ public class MiniMapController : MonoBehaviour
             SwitchingviewPoint_1.SetActive(true);
             Cursor.lockState = CursorLockMode.Locked;
             Player.PlayerMove = true;
+            starcraftUI.gameObject.SetActive(false);
+
         }
-        
+
         MiniMapView();
         MiniMapZoom();
     }
@@ -44,15 +48,15 @@ public class MiniMapController : MonoBehaviour
     private void MiniMapView()
     {
             Vector2 pos = Input.mousePosition;
-        if (0 <= pos.x && pos.x <= Padding) // 왼쪽
-            transform.Translate(moveSpeed * Vector3.right * Time.deltaTime, Space.World);
-        if (Screen.width - Padding <= pos.x && pos.x <= Screen.width ) // 오른쪽
-            transform.Translate(moveSpeed * Vector3.left * Time.deltaTime, Space.World);
-
-        if (0 <= pos.y && pos.y <= Padding) // 아래
-            transform.Translate(moveSpeed * Vector3.forward * Time.deltaTime, Space.World);
-        if (Screen.height - Padding <= pos.y && pos.y <= Screen.height) // 위
+        if (0 <= pos.x && pos.x <= Padding) // 왼쪽 = 위 back
             transform.Translate(moveSpeed * Vector3.back * Time.deltaTime, Space.World);
+        if (Screen.width - Padding <= pos.x && pos.x <= Screen.width ) // 오른쪽 = 아래forward
+            transform.Translate(moveSpeed * Vector3.forward * Time.deltaTime, Space.World);
+
+        if (0 <= pos.y && pos.y <= Padding) // 아래 = 왼right
+            transform.Translate(moveSpeed * Vector3.right * Time.deltaTime, Space.World);
+        if (Screen.height - Padding <= pos.y && pos.y <= Screen.height) // 위 =오left
+            transform.Translate(moveSpeed * Vector3.left * Time.deltaTime, Space.World);
 
     }
 }

@@ -1,20 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MyTower : MonoBehaviour
 {
-    public int Hp = 10;
+    [SerializeField]
+    private int level;
 
+    [SerializeField]
+    private int mineral;
+
+    public Enemy target;
+
+    public int Mineral { get { return mineral; } private set { mineral = value; } }
+
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+    }
     private void Update()
     {
         GameOver();
     }
 
+    private void TakeHit()
+    {
+        WaveManager.Instance.TakeDamage(target.damage);
+    }
     private void GameOver()
-    { 
-        if (Hp <= 0)
+    {
+        if (WaveManager.Instance.Heart <= 0)
+        {
             Destroy(gameObject);
+            Time.timeScale = 0;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Å¸¿ö¿¡ ºÎµúÇû´Ù");
+        if (collision.collider.tag == "Enemy")
+        {
+            Debug.Log("Å¸¿ö¿¡ ºÎµúÇû´Ù");
+            TakeHit();
+        }
     }
 
 

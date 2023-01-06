@@ -7,6 +7,11 @@ TagManager:
   - ViewPoint1
   - ViewPoint3
   - MiniMap
+  - MyTower
+  - EnemyTower
+  - Enemy
+  - TeamMonster
+  - Mini Camera
   layers:
   - Default
   - TransparentFX
@@ -18,9 +23,9 @@ TagManager:
   - View3
   - MiniMap
   - Player
-  - 
-  - 
-  - 
+  - MyTower
+  - Unit
+  - Ground
   - 
   - 
   - 
@@ -43,4 +48,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Hp
+    uniqueID: 3829279331
     locked: 0

@@ -26,6 +26,6 @@ public class Team : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        --Tower.Hp;
+        
     }
 }
