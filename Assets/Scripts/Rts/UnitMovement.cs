@@ -17,17 +17,21 @@ public class UnitMovement : MonoBehaviour
     public Vector3 detination;
     public LayerMask ground;
     public TeamMonster teamMonster;
-    
+
+    [SerializeField]
+    public PlayerViewr playerview;
    
 
     ICommandable buttonS, buttonH, buttonA;
 
     public NavMeshAgent Agent { get { return agent; } set { agent = value; } }
 
+   
 
     // Start is called before the first frame update
     void Start()
     {
+        playerview = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerViewr>();
         agent = GetComponent<NavMeshAgent>();
         teamMonster = GetComponent<TeamMonster>();
 
@@ -40,6 +44,9 @@ public class UnitMovement : MonoBehaviour
     void Update()
     {
         MoveStop();
+
+        if (!playerview.playerView)
+            return;
 
         if (Input.GetKeyDown("s")) buttonS.Execute();
         else if (Input.GetKeyDown("h")) buttonH.Execute();
@@ -68,6 +75,10 @@ public class UnitMovement : MonoBehaviour
             }
 
         }
+
+        if (!playerview.playerView)
+            return;
+
         if (Input.GetKey("a") && Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -95,7 +106,7 @@ public class UnitMovement : MonoBehaviour
             teamMonster.attack = true;
             agent.ResetPath();
             agent.velocity = Vector3.zero;
-            Debug.Log("몬스터가 목적지를 잃었다.");
+           // Debug.Log("몬스터가 목적지를 잃었다.");
         }
     }
 

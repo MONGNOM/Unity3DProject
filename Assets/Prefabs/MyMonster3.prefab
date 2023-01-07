@@ -2296,6 +2296,7 @@ MonoBehaviour:
   fireRagte: 20
   mineral: 20
   icon: {fileID: 21300000, guid: 18ca9d38bb3112646b1ee29f47320468, type: 3}
+  attack: 0
   enemyTower: {fileID: 0}
   unitMarker: {fileID: 8154193589106412915}
   destination: {x: 0, y: 0, z: 0}
@@ -2345,9 +2346,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+  placeSize: 0
+  detination: {x: 0, y: 0, z: 0}
   ground:
     serializedVersion: 2
     m_Bits: 4096
+  teamMonster: {fileID: 0}
+  playerview: {fileID: 0}
 --- !u!1 &4829182000666390387
 GameObject:
   m_ObjectHideFlags: 0

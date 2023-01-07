@@ -933,6 +933,7 @@ MonoBehaviour:
   fireRagte: 10
   mineral: 10
   icon: {fileID: 21300000, guid: b48a946c769b2c14288115b88b7b7302, type: 3}
+  attack: 0
   enemyTower: {fileID: 0}
   unitMarker: {fileID: 382276061659430127}
   destination: {x: 0, y: 0, z: 0}
@@ -1009,6 +1010,8 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 4096
+  teamMonster: {fileID: 0}
+  playerview: {fileID: 0}
 --- !u!1 &918136976804442311
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,10 @@ public class UnitClick : MonoBehaviour
     public LayerMask ground;
     public int[,] snailArray;
 
+    [SerializeField]
+    private float markeTimer;
+
+    public PlayerViewr playerview;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +24,11 @@ public class UnitClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        markeTimer -= Time.deltaTime;
+
+        if (markeTimer <= 0)
+            groundMarker.SetActive(false);
+
         if (Input.GetMouseButtonDown(1))
         {
             RaycastHit hit;
@@ -28,26 +37,13 @@ public class UnitClick : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
                 groundMarker.transform.position = hit.point;
-                groundMarker.SetActive(false);
                 groundMarker.SetActive(true);
-
+                markeTimer = 1.3f;
 
 
             }
         }
 
-        if ( Input.GetKey("a") && Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-            Ray ray = mycam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
-            {
-                groundMarker.transform.position = hit.point;
-                groundMarker.SetActive(false);
-                groundMarker.SetActive(true);
-            }
-        }   
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -78,6 +74,21 @@ public class UnitClick : MonoBehaviour
         
         }
 
+        if (!playerview.playerView)
+            return;
+        if ( Input.GetKey("a") && Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = mycam.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
+            {
+                groundMarker.transform.position = hit.point;
+                groundMarker.SetActive(true);
+                markeTimer = 1.3f;
+
+            }
+        }   
     }
 
         

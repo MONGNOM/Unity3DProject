@@ -5,9 +5,14 @@ using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
+enum playerstate { Normal, Battle }
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+     playerstate state;
+
+    private Animator anim;
+
     [SerializeField]
     private float movespeed;
 
@@ -17,37 +22,98 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float Gravity;
 
-    public bool PlayerMove = true;
-
     private PlayerViewr playerview;
-
 
     private float SpeedY;
     private CharacterController controller;
 
+    public bool playermove;
+
+    public bool rtsMove;
+
+    [SerializeField]
+    private float changeTime;
 
     private void Awake()
     {
         playerview = GetComponent<PlayerViewr>();
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        PlayerMove = true;
+        rtsMove = true;
+        playermove = true;
+        state = playerstate.Normal;
     }
     private void Update()
     {
-        if (!PlayerMove) return;
-        else
+        changeTime -= Time.deltaTime;
+        if (changeTime <= 0)
+            playermove = true;
+
+        switch (state)
         {
-            Move();
-            Jump();
+            case playerstate.Normal:
+                Move();
+                ChangeMode();
+                Jump();
+                break;
+    
+            case playerstate.Battle:
+                Move();
+                Jump(); 
+                Attack();
+                ChangeMode();
+                break;
         }
+
+    }
+
+
+
+    
+
+    public void ChangeMode()
+    {
+        if (!Input.GetKeyDown(KeyCode.E))
+            return;
+
+        if (state == playerstate.Normal)
+        {
+            state = playerstate.Battle;
+            anim.SetLayerWeight(1, 1f);
+            anim.SetTrigger("ChangeForm");
+            anim.SetLayerWeight(2, 0f);
+            playermove = false;
+            changeTime = 1.5f;
+        }
+        else if (state == playerstate.Battle)
+        {
+            state = playerstate.Normal;
+            anim.SetLayerWeight(1, 0f);
+            anim.SetTrigger("ChangeForm");
+            anim.SetLayerWeight(2, 0f);
+            playermove = false;
+            changeTime = 1.5f;
+        }
+    }
+
+    public void Attack()
+    {
+        if (!Input.GetMouseButtonDown(0)) return;
+        
+        anim.SetTrigger("Attack");
+        anim.SetLayerWeight(2, 1);
     }
 
     public void Move()
     {
+        if (!playermove) return;
+
+        if (!rtsMove) return;
+
         if (playerview.playerView) // 1인칭 이동 및 시점
         {
             controller.Move(transform.right * Input.GetAxis("Horizontal") * movespeed * Time.deltaTime);
@@ -59,8 +125,13 @@ public class PlayerController : MonoBehaviour
             Vector3 rightVec = new Vector3(Camera.main.transform.right.x, 0f, Camera.main.transform.right.z).normalized;
 
             Vector3 moveInput = Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal");
-            
+
+
+            anim.SetFloat("XInput", Input.GetAxis("Horizontal"));
+            anim.SetFloat("YInput", Input.GetAxis("Vertical"));
+
             if (moveInput.sqrMagnitude > 1) moveInput.Normalize();
+
 
             Vector3 moveVec = forwardVec * moveInput.z + rightVec * moveInput.x;
 
@@ -70,11 +141,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Dumbling()
+    { 
+        
+    
+    }
+
     public void Jump()
     {
-        if (Input.GetButtonDown("Jump"))    SpeedY = JumpPower;
-        else if (controller.isGrounded)     SpeedY = 0;
-        else                                SpeedY += Gravity * Time.deltaTime;
+        if (!rtsMove) return;
+
+        anim.SetFloat("YSpeed", SpeedY);
+
+        if (Input.GetButtonDown("Jump")) SpeedY = JumpPower;
+        else if (controller.isGrounded) SpeedY = 0;
+        else SpeedY += Gravity * Time.deltaTime;
 
         controller.Move(Vector3.up * SpeedY * Time.deltaTime);
     }

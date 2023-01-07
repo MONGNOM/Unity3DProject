@@ -24,20 +24,22 @@ public class MiniMapController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            gameObject.SetActive(false);
-            SwitchingviewPoint_1.SetActive(true);
-            Cursor.lockState = CursorLockMode.Locked;
-            Player.PlayerMove = true;
-            starcraftUI.gameObject.SetActive(false);
-
-        }
 
         MiniMapView();
         MiniMapZoom();
+        MiniMapEscape();
     }
 
+    private void MiniMapEscape()
+    {
+        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+
+            gameObject.SetActive(false);
+            SwitchingviewPoint_1.SetActive(true);
+            Cursor.lockState = CursorLockMode.Locked;
+            starcraftUI.gameObject.SetActive(false);
+            Player.rtsMove = true;
+    }
     private void MiniMapZoom()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");

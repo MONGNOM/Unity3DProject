@@ -32,7 +32,9 @@ public class PlayerViewr : MonoBehaviour
 
     [SerializeField]
     private Canvas starcraftUI;
-    
+
+    [SerializeField]
+    private GameObject playerModel;
 
     public PlayerController player;
 
@@ -41,12 +43,15 @@ public class PlayerViewr : MonoBehaviour
 
     private float xRotation = 0;
 
+    
    
 
 
     private void Start()
     {
-        playerView = true;
+        //playerModel.SetActive(false);
+        //SwitchingviewPoint_3.SetActive(false);
+        playerView = false;
         view = Playerview.view1;
         Cursor.lockState = CursorLockMode.Locked;
         SwitchingviewPoint_MiniMap.SetActive(false);
@@ -56,19 +61,19 @@ public class PlayerViewr : MonoBehaviour
    
     private void Update()
     {
-            Rotate();
-            View();
-            Test();
-       
+         Rotate();
+         View();
+         Test();
     }
     private void Test()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) ChangedView();
+        if (Input.GetKeyDown(KeyCode.Q)) ChangedView();
     }
      
     private void View()
     {
         if (view == Playerview.view1) transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime);
+        else transform.forward = new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z).normalized;
         
     }
 
@@ -91,6 +96,7 @@ public class PlayerViewr : MonoBehaviour
         if (!playerView)
         {
             SwitchingviewPoint_1.SetActive(true);
+            playerModel.SetActive(false);
             SwitchingviewPoint_3.SetActive(false);
             playerView = !playerView;
 
@@ -98,6 +104,7 @@ public class PlayerViewr : MonoBehaviour
         else
         {
             SwitchingviewPoint_1.SetActive(false);
+            playerModel.SetActive(true);
             SwitchingviewPoint_3.SetActive(true);
             playerView = !playerView;
         }
@@ -114,8 +121,8 @@ public class PlayerViewr : MonoBehaviour
             SwitchingviewPoint_3.SetActive(false);
             SwitchingviewPoint_MiniMap.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
-            player.PlayerMove = false;
             starcraftUI.gameObject.SetActive(true);
+            player.rtsMove = false;
             Debug.Log("관리자 시점으로 전환");
         }
     }
