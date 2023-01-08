@@ -34,6 +34,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float changeTime;
 
+    [SerializeField]
+    private WeaponHand weapon;
+
+    [SerializeField]
+    private WeaponHouse weaponhouse;
+
+    public bool playerBattle;
+
     private void Awake()
     {
         playerview = GetComponent<PlayerViewr>();
@@ -43,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        weapon.HideSword();
+        weaponhouse.HideSword();
         rtsMove = true;
         playermove = true;
         state = playerstate.Normal;
@@ -72,9 +82,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
-    
-
     public void ChangeMode()
     {
         if (!Input.GetKeyDown(KeyCode.E))
@@ -88,6 +95,7 @@ public class PlayerController : MonoBehaviour
             anim.SetLayerWeight(2, 0f);
             playermove = false;
             changeTime = 1.5f;
+            playerBattle = true;
         }
         else if (state == playerstate.Battle)
         {
@@ -97,6 +105,7 @@ public class PlayerController : MonoBehaviour
             anim.SetLayerWeight(2, 0f);
             playermove = false;
             changeTime = 1.5f;
+            playerBattle = false;
         }
     }
 
@@ -140,13 +149,6 @@ public class PlayerController : MonoBehaviour
             if (moveVec.sqrMagnitude != 0) transform.forward = Vector3.Lerp(transform.forward, moveVec, 0.8f);
         }
     }
-
-    public void Dumbling()
-    { 
-        
-    
-    }
-
     public void Jump()
     {
         if (!rtsMove) return;

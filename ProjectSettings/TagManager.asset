@@ -12,6 +12,8 @@ TagManager:
   - Enemy
   - TeamMonster
   - Mini Camera
+  - Sword
+  - Hand
   layers:
   - Default
   - TransparentFX
@@ -26,8 +28,8 @@ TagManager:
   - MyTower
   - Unit
   - Ground
-  - 
-  - 
+  - Sword
+  - Hand
   - 
   - 
   - 

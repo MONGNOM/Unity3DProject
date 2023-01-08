@@ -43,10 +43,7 @@ public class PlayerViewr : MonoBehaviour
 
     private float xRotation = 0;
 
-    
    
-
-
     private void Start()
     {
         //playerModel.SetActive(false);
@@ -86,9 +83,6 @@ public class PlayerViewr : MonoBehaviour
             viewPoint1.localRotation = Quaternion.Euler(xRotation, 0, 0);
         }
     }
-
-
-    
 
     public void ChangedView()
     {
