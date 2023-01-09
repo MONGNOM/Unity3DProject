@@ -12,5 +12,5 @@ public class Trigger : MonoBehaviour
     {
         if(other.tag == "Player")
         ChangeView?.Invoke();
-    }
+    }   
 }

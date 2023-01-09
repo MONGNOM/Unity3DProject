@@ -46,9 +46,9 @@ public class PlayerViewr : MonoBehaviour
    
     private void Start()
     {
-        //playerModel.SetActive(false);
-        //SwitchingviewPoint_3.SetActive(false);
-        playerView = false;
+        playerModel.SetActive(false);
+        SwitchingviewPoint_3.SetActive(false);
+        playerView = true;
         view = Playerview.view1;
         Cursor.lockState = CursorLockMode.Locked;
         SwitchingviewPoint_MiniMap.SetActive(false);

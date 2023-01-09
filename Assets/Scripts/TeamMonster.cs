@@ -24,7 +24,10 @@ public class TeamMonster : MonoBehaviour
     public Sprite icon;
     public bool attack;
 
+    private Animator anim;
 
+    [SerializeField]
+    private float dieTime;
 
     [SerializeField]
     private EnemyTower enemyTower;
@@ -35,17 +38,29 @@ public class TeamMonster : MonoBehaviour
 
     private UnitMovement move;
 
+    public MakeFireBall fireball;
 
     [SerializeField]
     public Vector3 destination;
 
     public LayerMask ground;
 
+    public bool die;
+
+    public bool marine;
+
+    public bool maekfireball;
+
+    public bool Takehit;
+
+    public FireballShot ball;
+
     public int Mineral { get { return mineral; } private set { mineral = value; } }
 
     private void Awake()
     {
         
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         curhp = maxhp;
         move = GetComponent<UnitMovement>();
@@ -57,14 +72,21 @@ public class TeamMonster : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
         UnitSelection.Instance.unitList.Add(this.gameObject);
         attack = true;
+        die = false;
+        maekfireball = false;
+
     }
 
-   
+
 
     private void Update()
     {
-        FindTarget();
         Die();
+
+        if (curhp > 0)
+        {
+            FindTarget();
+        }
     }
 
     private void OnDestroy()
@@ -76,6 +98,7 @@ public class TeamMonster : MonoBehaviour
 
     private void FindTarget()
     {
+        maekfireball = false;
         if (attack)
         {
             target = null;
@@ -83,35 +106,57 @@ public class TeamMonster : MonoBehaviour
             for (int i = 0; i < colliders.Length; i++)
             {
                 target = colliders[i].GetComponent<Enemy>();
-                if (null != target)
+                if (null != target && !marine)
                 {
-                    gameObject.transform.LookAt(target.transform.position);
                     Attack();
+                    gameObject.transform.LookAt(target.transform.position);
                     agent.destination = target.transform.position;
                     break;
                 }
-              
+                else if (null != target && marine)
+                {
+
+                         Takehit = false;
+                    maekfireball = true;
+                    Attack();
+                    gameObject.transform.forward = target.transform.position;
+                    gameObject.transform.LookAt(target.transform.position);
+                    break;
+                }
+
             }
         }
         else
-        {
             return;
-        }
     }
 
     private void Attack()
-    { 
-        
+    {
+        anim.SetTrigger("Attack");
     }
 
-    private void TakeHit()
+    public void TakeHit()
     {
-        curhp -= target.damage;    
+        Takehit = true;
+        curhp -= target.damage;
+        anim.SetTrigger("TakeHit");
     }
 
     private void Die()
     {
-        if (curhp <= 0) Destroy(gameObject);
+        if (curhp <= 0)
+        {
+            dieTime += Time.deltaTime;
+            anim.SetBool("Die",true);
+            die = true;
+            attack = false;
+            agent.speed = 0;
+
+            if (dieTime >= 1.5f)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
 

@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
     //[SerializeField]
     //private int mineral;
 
+    public FireballShot ball;
+
     private WaveManager waveManager;
 
     private TeamMonster target;
@@ -32,6 +34,7 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent agent;
 
+    
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -39,11 +42,10 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void Start()
+    public void Start()
     {
         tower = GameObject.FindGameObjectWithTag("MyTower").GetComponent<MyTower>();
         //target = GameObject.FindGameObjectWithTag("TeamMonster").GetComponent<TeamMonster>();
-
 
     }
 
@@ -63,7 +65,7 @@ public class Enemy : MonoBehaviour
             if (null != target)
             {
                 gameObject.transform.LookAt(target.transform.position);
-                agent.destination = target.transform.position;
+                //agent.destination = target.transform.position;
                 break;
             }
             else
@@ -75,6 +77,7 @@ public class Enemy : MonoBehaviour
     private void TakeHit()
     {
         curhp -= target.damage;
+        curhp -= ball.damage;
     }
 
     private void Die()

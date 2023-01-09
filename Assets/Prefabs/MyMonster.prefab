@@ -110,7 +110,7 @@ RectTransform:
   m_Children:
   - {fileID: 8970898107785847411}
   m_Father: {fileID: 2879873121588154211}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -220,7 +220,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2879873121588154211}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
 --- !u!212 &2256200469244224660
 SpriteRenderer:
@@ -304,7 +304,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2879873121588154211}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2738429571178510297
 SkinnedMeshRenderer:
@@ -1568,7 +1568,7 @@ Transform:
   - {fileID: 2875891328606935639}
   - {fileID: 2875842947533393135}
   m_Father: {fileID: 2879873121588154211}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2874115705484198661
 GameObject:
@@ -1966,9 +1966,12 @@ GameObject:
   - component: {fileID: 3151444993021290039}
   - component: {fileID: 3107342070877439087}
   - component: {fileID: 3350334759876284454}
+  - component: {fileID: 6402841878565547676}
+  - component: {fileID: -168164042649526166}
+  - component: {fileID: 2410806013907019572}
   m_Layer: 11
   m_Name: MyMonster
-  m_TagString: TeamMonster
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1981,10 +1984,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2874354795402153895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.099406, y: -48.058025, z: 258.2418}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8379910466939183066}
   - {fileID: 365605671603514824}
   - {fileID: 2876050841832664647}
   - {fileID: 2879816541004682415}
@@ -2025,20 +2029,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badc081a506eb184aae9956f72c32eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 30
+  maxhp: 5000
   curhp: 0
-  damage: 70
+  damage: 30
   range: 20
   fireRagte: 20
   mineral: 30
   icon: {fileID: 21300000, guid: a054c1c88fc11d94bb30680a572de873, type: 3}
   attack: 0
+  dieTime: 0
   enemyTower: {fileID: 0}
   unitMarker: {fileID: 2075283082425271775}
+  fireball: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   ground:
     serializedVersion: 2
     m_Bits: 0
+  die: 0
+  marine: 0
+  maekfireball: 0
+  Takehit: 0
+  ball: {fileID: 7546247757986920195, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
 --- !u!195 &3418243981050053189
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2110,7 +2121,68 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   teamMonster: {fileID: 0}
+  anim: {fileID: 0}
   playerview: {fileID: 0}
+--- !u!114 &6402841878565547676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2874354795402153895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad796d501ef241f4ab44051eb73144c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 1113278573729469852}
+  unit: {fileID: 3350334759876284454}
+--- !u!114 &-168164042649526166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2874354795402153895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b82f4491c4b48409e779834697eefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireball:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2410806013907019572}
+        m_TargetAssemblyTypeName: MakeFireBall, Assembly-CSharp
+        m_MethodName: MakeFireball
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  monster: {fileID: 1113278573729469852}
+--- !u!114 &2410806013907019572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2874354795402153895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56234c4024749d43b90b6a50e4b608d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireBall: {fileID: 6500326551262403817, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
+  attackMarine: {fileID: 8379910466939183066}
+  makeFireTiem: 2
+  deleteTime: 3
+  TeamMonster: {fileID: 1113278573729469852}
+  ball: {fileID: 7546247757986920195, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
 --- !u!1 &2874374955282560743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2345,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2879873121588154211}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2742644448648279937
 SkinnedMeshRenderer:
@@ -2646,6 +2718,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &7355614703412504354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8379910466939183066}
+  m_Layer: 0
+  m_Name: FIreballStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8379910466939183066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355614703412504354}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6666667, z: 1.3333334}
+  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2879873121588154211}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8057298197088035040
 GameObject:
   m_ObjectHideFlags: 0

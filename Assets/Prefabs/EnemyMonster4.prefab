@@ -2024,8 +2024,8 @@ Transform:
   m_GameObject: {fileID: 4829144011169247677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4830536549871571285}
   - {fileID: 4830174082302839913}
@@ -2094,6 +2094,7 @@ MonoBehaviour:
   damage: 20
   range: 20
   fireRagte: 20
+  ball: {fileID: 7546247757986920195, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
   tower: {fileID: 0}
 --- !u!54 &5393093267097923632
 Rigidbody:

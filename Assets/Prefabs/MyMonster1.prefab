@@ -1612,7 +1612,7 @@ Transform:
   m_GameObject: {fileID: 66375548711087897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.321079, y: -48.116993, z: 256.9911}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2442388506420573548}
@@ -1662,12 +1662,19 @@ MonoBehaviour:
   mineral: 40
   icon: {fileID: 21300000, guid: 6846b4ccaf716bc45bf64e991f6e787e, type: 3}
   attack: 0
+  dieTime: 0
   enemyTower: {fileID: 0}
   unitMarker: {fileID: 1086437320576519551}
+  fireball: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   ground:
     serializedVersion: 2
     m_Bits: 0
+  die: 0
+  marine: 0
+  maekfireball: 0
+  Takehit: 0
+  ball: {fileID: 0}
 --- !u!195 &8917451622390355666
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1739,6 +1746,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   teamMonster: {fileID: 0}
+  anim: {fileID: 0}
   playerview: {fileID: 0}
 --- !u!1 &66382913587669229
 GameObject:

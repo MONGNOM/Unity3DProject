@@ -17,27 +17,30 @@ public class UnitMovement : MonoBehaviour
     public Vector3 detination;
     public LayerMask ground;
     public TeamMonster teamMonster;
+    public Animator anim;
 
     [SerializeField]
     public PlayerViewr playerview;
    
 
-    ICommandable buttonS, buttonH, buttonA;
+    ICommandable buttonS, buttonH, buttonA, buttona;
 
     public NavMeshAgent Agent { get { return agent; } set { agent = value; } }
 
-   
+
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();    
         playerview = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerViewr>();
         agent = GetComponent<NavMeshAgent>();
         teamMonster = GetComponent<TeamMonster>();
 
         buttonS = new StopMoveCommand(this,teamMonster);
         buttonH = new HoldMoveCommand(this,teamMonster);
-        buttonA = new AttackMoveCommand(this,teamMonster);
+        buttonA = new AttackMoveCommand(this, teamMonster);
+        buttona = new Attackmarine(teamMonster,this);
     }
 
     // Update is called once per frame
@@ -50,12 +53,16 @@ public class UnitMovement : MonoBehaviour
 
         if (Input.GetKeyDown("s")) buttonS.Execute();
         else if (Input.GetKeyDown("h")) buttonH.Execute();
-        else if (Input.GetKey("a") && Input.GetMouseButtonDown(0)) buttonA.Execute();
+        else if (Input.GetKey("a") && Input.GetMouseButtonDown(0))
+        {
+            buttonA.Execute();
+            buttona.Execute();
+        }
     }
 
     private void FixedUpdate()
     {
-        Move();
+            Move();
     }
 
     void Move()
@@ -67,10 +74,12 @@ public class UnitMovement : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
+                teamMonster.marine = true;
                 agent.enabled = true;
                 agent.isStopped = false;
                 detination = hit.point;
                 agent.destination = detination;
+                anim.SetTrigger("Walk");
                 Debug.Log("몬스터가 출발합니다.");
             }
 
@@ -87,9 +96,11 @@ public class UnitMovement : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
                 agent.enabled = true;
+                teamMonster.marine = true;
                 agent.isStopped = false;
                 detination = hit.point;
                 agent.destination = detination;
+                anim.SetTrigger("Walk");
                 Debug.Log("몬스터가 출발합니다.");
             }
         }
