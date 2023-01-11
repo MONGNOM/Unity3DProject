@@ -112,5 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: -7139151564131793180, guid: dbae903b99f91b745a0b33c0c087685f, type: 3}
   monster: {fileID: 1113278573729469852, guid: ef5417d4cff1a734aa2c793ab186d072, type: 3}
-  shotSpeed: 1
+  shotSpeed: 20
+  deleteTime: 0
   damage: 0

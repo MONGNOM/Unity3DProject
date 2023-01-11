@@ -493,6 +493,7 @@ MonoBehaviour:
   damage: 40
   range: 20
   fireRagte: 20
+  ball: {fileID: 0}
   tower: {fileID: 0}
 --- !u!65 &7018990398909584406
 BoxCollider:

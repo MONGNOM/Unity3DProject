@@ -23,12 +23,20 @@ public class SingleTon<T> : MonoBehaviour where T : MonoBehaviour
                 }
                 instance = gameObject.GetOrAddComponent<T>();
             }
-            return instance;
+            return instance;    
         }
     }
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);  // 씬이 변경되어도 제거되지 않는 게임오브젝트로 설정
+     
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);  // 씬이 변경되어도 제거되지 않는 게임오브젝트로 설정
+        }
     }
 }

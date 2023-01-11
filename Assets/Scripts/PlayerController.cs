@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
@@ -42,11 +43,19 @@ public class PlayerController : MonoBehaviour
 
     public bool playerBattle;
 
+    public MiniMapController minimap;
+
+    public Canvas canvas;
     private void Awake()
     {
+
         playerview = GetComponent<PlayerViewr>();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        //minimap = GameObject.Find("MiniMap_Cam").GetComponent<MiniMapController>();
+        //canvas = GameObject.Find("StarCraftCanvus").GetComponent<Canvas>();
+
+
     }
 
     private void Start()
@@ -59,6 +68,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+
         changeTime -= Time.deltaTime;
         if (changeTime <= 0)
             playermove = true;

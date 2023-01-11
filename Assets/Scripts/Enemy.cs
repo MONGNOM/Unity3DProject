@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
             if (null != target)
             {
                 gameObject.transform.LookAt(target.transform.position);
-                //agent.destination = target.transform.position;
+                agent.destination = target.transform.position;
                 break;
             }
             else
@@ -76,8 +76,10 @@ public class Enemy : MonoBehaviour
     }
     private void TakeHit()
     {
-        curhp -= target.damage;
+        if (ball)
         curhp -= ball.damage;
+        else
+        curhp -= target.damage;
     }
 
     private void Die()

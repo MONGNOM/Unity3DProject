@@ -1,6 +1,8 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MiniMapController : MonoBehaviour
@@ -14,7 +16,7 @@ public class MiniMapController : MonoBehaviour
     private float ZoomSpeed;
 
     [SerializeField]
-    private GameObject SwitchingviewPoint_1;
+    private CinemachineVirtualCamera SwitchingviewPoint_1;
 
     [SerializeField]
     private PlayerController Player;
@@ -22,6 +24,14 @@ public class MiniMapController : MonoBehaviour
     [SerializeField]
     private Canvas starcraftUI;
 
+    public CinemachineVirtualCamera cinemachine;
+
+    private void Awake()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        cinemachine = GetComponent<CinemachineVirtualCamera>();
+        SwitchingviewPoint_1 = GameObject.Find("CM vcam2").GetComponent<CinemachineVirtualCamera>();
+    }
     void Update()
     {
 
@@ -34,10 +44,10 @@ public class MiniMapController : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
 
-            gameObject.SetActive(false);
-            SwitchingviewPoint_1.SetActive(true);
+            cinemachine.enabled = false;
+            SwitchingviewPoint_1.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
-            starcraftUI.gameObject.SetActive(false);
+            starcraftUI.enabled = false;
             Player.rtsMove = true;
     }
     private void MiniMapZoom()

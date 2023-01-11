@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -23,12 +24,12 @@ public class PlayerViewr : MonoBehaviour
     private Transform viewPoint3;
 
     [SerializeField]
-    public GameObject SwitchingviewPoint_1;
+    public CinemachineVirtualCamera SwitchingviewPoint_1;
     [SerializeField]
     public GameObject SwitchingviewPoint_3;
 
     [SerializeField]
-    public GameObject SwitchingviewPoint_MiniMap;
+    public CinemachineVirtualCamera SwitchingviewPoint_MiniMap;
 
     [SerializeField]
     private Canvas starcraftUI;
@@ -43,7 +44,14 @@ public class PlayerViewr : MonoBehaviour
 
     private float xRotation = 0;
 
-   
+
+    private void Awake()
+    {
+        SwitchingviewPoint_MiniMap = GameObject.Find("MiniMap_Cam").GetComponent<CinemachineVirtualCamera>();
+        SwitchingviewPoint_1 = GameObject.Find("CM vcam2").GetComponent<CinemachineVirtualCamera>();
+        starcraftUI = GameObject.Find("StarCraftCanvus").GetComponent<Canvas>();
+
+    }
     private void Start()
     {
         playerModel.SetActive(false);
@@ -51,14 +59,19 @@ public class PlayerViewr : MonoBehaviour
         playerView = true;
         view = Playerview.view1;
         Cursor.lockState = CursorLockMode.Locked;
-        SwitchingviewPoint_MiniMap.SetActive(false);
-        starcraftUI.gameObject.SetActive(false);
+        SwitchingviewPoint_MiniMap.enabled = false;
+        starcraftUI.enabled = false;
     }
 
    
     private void Update()
     {
-         Rotate();
+        // 계속 업데이트에서 찾아주면 안되니까 씬 전환이 RTS로 넘어올때 가져와야함
+        // 매니저 업데이트에 있는 친구들 다 바꿔줘야함 안그럼 2스테이지 가면 터질듯 ㅋㅋ
+            SwitchingviewPoint_MiniMap = GameObject.Find("MiniMap_Cam").GetComponent<CinemachineVirtualCamera>();
+            starcraftUI = GameObject.Find("StarCraftCanvus").GetComponent<Canvas>();
+
+        Rotate();
          View();
          Test();
     }
@@ -89,7 +102,7 @@ public class PlayerViewr : MonoBehaviour
        
         if (!playerView)
         {
-            SwitchingviewPoint_1.SetActive(true);
+            SwitchingviewPoint_1.enabled =true;
             playerModel.SetActive(false);
             SwitchingviewPoint_3.SetActive(false);
             playerView = !playerView;
@@ -97,7 +110,7 @@ public class PlayerViewr : MonoBehaviour
         }
         else
         {
-            SwitchingviewPoint_1.SetActive(false);
+            SwitchingviewPoint_1.enabled = false;
             playerModel.SetActive(true);
             SwitchingviewPoint_3.SetActive(true);
             playerView = !playerView;
@@ -111,11 +124,11 @@ public class PlayerViewr : MonoBehaviour
     {
         if (other.tag == "MiniMap" && Input.GetKey("b"))
         {
-            SwitchingviewPoint_1.SetActive(false);
+            SwitchingviewPoint_1.enabled = false;
             SwitchingviewPoint_3.SetActive(false);
-            SwitchingviewPoint_MiniMap.SetActive(true);
+            SwitchingviewPoint_MiniMap.enabled = true;
             Cursor.lockState = CursorLockMode.Confined;
-            starcraftUI.gameObject.SetActive(true);
+            starcraftUI.enabled = true;
             player.rtsMove = false;
             Debug.Log("관리자 시점으로 전환");
         }

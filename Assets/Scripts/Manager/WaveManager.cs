@@ -46,7 +46,11 @@ public class WaveManager : SingleTon<WaveManager>
         spawnRoutine = StartCoroutine(SpawnRoutine());
     }
 
-
+    private void Update()
+    {
+        spawnPoint = GameObject.Find("enemySpawnPoint").GetComponent<EnemySpawnPoint>();
+        myTower = GameObject.Find("MyTower").GetComponent<MyTower>();
+    }
     private IEnumerator SpawnRoutine()
     {
         while (true)

@@ -2091,10 +2091,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxhp: 30
   curhp: 0
-  damage: 20
+  damage: 100
   range: 20
   fireRagte: 20
-  ball: {fileID: 7546247757986920195, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
+  ball: {fileID: 0}
   tower: {fileID: 0}
 --- !u!54 &5393093267097923632
 Rigidbody:

@@ -34,8 +34,13 @@ public class SpawnManager : SingleTon<SpawnManager>
         get { return mineral; }
         private set { mineral = value; OnChangeMineral?.Invoke(mineral); }
     }
-  
 
+    private void Update()
+    {
+        point = GameObject.Find("SpawnPoint").GetComponent<Transform>();
+        myTower = GameObject.Find("MyTower").GetComponent<MyTower>();
+        
+    }
 
     public void Spawn()
     {

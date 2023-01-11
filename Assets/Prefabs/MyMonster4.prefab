@@ -938,12 +938,16 @@ MonoBehaviour:
   dieTime: 0
   enemyTower: {fileID: 0}
   unitMarker: {fileID: 382276061659430127}
+  fireball: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   ground:
     serializedVersion: 2
     m_Bits: 0
   die: 0
   marine: 0
+  maekfireball: 0
+  Takehit: 0
+  ball: {fileID: 0}
 --- !u!54 &-234259186964962028
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -955,7 +959,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 10
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80

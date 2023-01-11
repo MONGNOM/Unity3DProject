@@ -20,7 +20,7 @@ public class EnemyTower : MonoBehaviour
     private void Start()
     {
         curhp = maxhp;
-        teamMonster = GameObject.FindGameObjectWithTag("TeamMonster").GetComponent<TeamMonster>();
+        //teamMonster = GameObject.FindGameObjectWithTag("TeamMonster").GetComponent<TeamMonster>();
 
     }
 

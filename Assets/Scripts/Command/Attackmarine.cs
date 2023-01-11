@@ -13,7 +13,7 @@ public class Attackmarine : MonoBehaviour,ICommandable
         this.unit = unit;
     }
 
-    private void Update()
+    public void Update()
     {
         monster.marine = true;
     }

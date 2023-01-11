@@ -116,7 +116,8 @@ public class TeamMonster : MonoBehaviour
                 else if (null != target && marine)
                 {
 
-                         Takehit = false;
+                    agent.isStopped = true;
+                    Takehit = false;
                     maekfireball = true;
                     Attack();
                     gameObject.transform.forward = target.transform.position;
