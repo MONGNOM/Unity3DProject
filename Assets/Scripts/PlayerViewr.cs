@@ -70,11 +70,7 @@ public class PlayerViewr : MonoBehaviour
    
     private void Update()
     {
-        // 계속 업데이트에서 찾아주면 안되니까 씬 전환이 RTS로 넘어올때 가져와야함
-        // 매니저 업데이트에 있는 친구들 다 바꿔줘야함 안그럼 2스테이지 가면 터질듯 ㅋㅋ
-            //SwitchingviewPoint_MiniMap = GameObject.Find("MiniMap_Cam").GetComponent<CinemachineVirtualCamera>();
-            //starcraftUI = GameObject.Find("StarCraftCanvus").GetComponent<Canvas>();
-
+       
         Rotate();
          View();
          Test();

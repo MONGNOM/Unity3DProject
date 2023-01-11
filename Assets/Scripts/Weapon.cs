@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public new Collider collider;
+
+    private void Awake()
     {
-        
+        collider = GetComponent<Collider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag == "Enemy")
+        {
+            Destroy(other.gameObject);
+            Debug.Log("몬스터를 죽였다");
+        }
     }
 }

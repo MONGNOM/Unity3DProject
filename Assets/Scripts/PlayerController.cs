@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     [SerializeField]
+    private float attackRange;
+    [SerializeField, Range(0f,360f)]
+    private float attackAngle;
+
+    [SerializeField]
     private float movespeed;
 
     [SerializeField]
@@ -44,6 +49,8 @@ public class PlayerController : MonoBehaviour
     public bool playerBattle;
 
     public MiniMapController minimap;
+    
+
 
     private void Awake()
     {
@@ -124,9 +131,39 @@ public class PlayerController : MonoBehaviour
     public void Attack()
     {
         if (!Input.GetMouseButtonDown(0)) return;
-        
+
         anim.SetTrigger("Attack");
-        anim.SetLayerWeight(2, 1);
+        //anim.SetLayerWeight(2, 1);
+   
+
+    }
+    public void OnAttackHit()
+    {
+        // 1. 범위내에 있는가?
+        Collider[] collders = Physics.OverlapSphere(transform.position, attackRange);
+        for (int i = 0; i < collders.Length; i++)
+        {
+            Vector3 dirToTarget = (collders[i].transform.position - transform.position).normalized;
+            Vector3 rightDir = AngleToDir(transform.eulerAngles.y + attackAngle * 0.5f);
+
+            // 2. 각도내에 있는가?
+            if (Vector3.Dot(transform.forward, dirToTarget) > Vector3.Dot(transform.forward, rightDir))
+            { 
+                if (collders[i].gameObject.tag == "Enemy")
+                    Destroy(collders[i].gameObject);
+            }
+        }
+
+    }
+
+    public void OnAttackStart()
+    {
+       // weapon.EnableWeapon();
+    }
+
+    public void OnAttackEnd()
+    {
+       // weapon.DisableWeapon();
     }
 
     public void Move()
@@ -172,5 +209,23 @@ public class PlayerController : MonoBehaviour
         else SpeedY += Gravity * Time.deltaTime;
 
         controller.Move(Vector3.up * SpeedY * Time.deltaTime);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        Vector3 rightDir = AngleToDir(transform.eulerAngles.y + attackAngle * 0.5f);
+        Vector3 leftDir = AngleToDir(transform.eulerAngles.y - attackAngle * 0.5f);
+        Debug.DrawRay(transform.position, rightDir * attackRange, Color.blue);
+        Debug.DrawRay(transform.position, leftDir * attackRange, Color.blue);
+
+    }
+
+    private Vector3 AngleToDir(float angle)
+    {
+        float raidan = angle * Mathf.Deg2Rad;
+        return new Vector3(Mathf.Sin(raidan), 0, Mathf.Cos(raidan));
     }
 }
