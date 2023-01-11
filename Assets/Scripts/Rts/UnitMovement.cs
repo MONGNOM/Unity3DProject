@@ -18,6 +18,8 @@ public class UnitMovement : MonoBehaviour
     public LayerMask ground;
     public TeamMonster teamMonster;
     public Animator anim;
+    public Attackmarine attackmarine;
+    public AttackMoveCommand command;
 
     [SerializeField]
     public PlayerViewr playerview;
@@ -74,7 +76,6 @@ public class UnitMovement : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
-                teamMonster.marine = true;
                 agent.enabled = true;
                 agent.isStopped = false;
                 detination = hit.point;
@@ -96,7 +97,6 @@ public class UnitMovement : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
             {
                 agent.enabled = true;
-                teamMonster.marine = true;
                 agent.isStopped = false;
                 detination = hit.point;
                 agent.destination = detination;

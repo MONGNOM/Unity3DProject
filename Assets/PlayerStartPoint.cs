@@ -9,7 +9,8 @@ public class PlayerStartPoint : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();   
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player.transform.position = gameObject.transform.position;
+        Debug.Log("플레이어 스타트 지점");
     }
 }

@@ -6,18 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class Scene : SingleTon<Scene>
 {
-    private sceneRpg sceneRpg;
-
-    private Canvas startcraftView;
-    private void Awake()
+    private void OnTriggerExit(Collider other)
     {
-        sceneRpg = GetComponent<sceneRpg>();
-
-    }
-   
-    private void OnTriggerEnter(Collider other)
-    {
+        if (other.tag == "Player")
+        {
             Debug.Log("RTS로 이동합니다.");
-            SceneManager.LoadScene("MainGameRTS");
+            LodingSceneController.LoadScene("MainGameRTS");
+
+        }
     }
 }

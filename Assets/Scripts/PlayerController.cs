@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
 
     public MiniMapController minimap;
 
-    public Canvas canvas;
     private void Awake()
     {
 
@@ -60,6 +59,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
+
         weapon.HideSword();
         weaponhouse.HideSword();
         rtsMove = true;

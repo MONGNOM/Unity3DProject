@@ -927,9 +927,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badc081a506eb184aae9956f72c32eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 5000
+  maxhp: 100
   curhp: 0
-  damage: 1
+  damage: 20
   range: 10
   fireRagte: 10
   mineral: 10
@@ -938,13 +938,15 @@ MonoBehaviour:
   dieTime: 0
   enemyTower: {fileID: 0}
   unitMarker: {fileID: 382276061659430127}
+  target: {fileID: 0}
   fireball: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   ground:
     serializedVersion: 2
     m_Bits: 0
   die: 0
-  marine: 0
+  command: {fileID: 0}
+  attackmarine: {fileID: 0}
   maekfireball: 0
   Takehit: 0
   ball: {fileID: 0}
@@ -1020,6 +1022,8 @@ MonoBehaviour:
     m_Bits: 4096
   teamMonster: {fileID: 0}
   anim: {fileID: 0}
+  attackmarine: {fileID: 0}
+  command: {fileID: 0}
   playerview: {fileID: 0}
 --- !u!114 &-5759516667377429757
 MonoBehaviour:
@@ -1035,6 +1039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamMonster: {fileID: 3171707839461644733}
   unitMovement: {fileID: 3935291885466278273}
+  attack: 0
 --- !u!1 &918136976804442311
 GameObject:
   m_ObjectHideFlags: 0

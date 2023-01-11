@@ -13,7 +13,7 @@ public class FireballShot : MonoBehaviour
 
     private void Start()
     {
-        damage = monster.damage;
+        damage = monster.damage;    
     }
     public FireballShot(Enemy target)
     {

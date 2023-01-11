@@ -44,19 +44,22 @@ public class WaveManager : SingleTon<WaveManager>
     private void Start()
     {
         spawnRoutine = StartCoroutine(SpawnRoutine());
-    }
-
-    private void Update()
-    {
         spawnPoint = GameObject.Find("enemySpawnPoint").GetComponent<EnemySpawnPoint>();
         myTower = GameObject.Find("MyTower").GetComponent<MyTower>();
     }
+
+    //private void Update()
+    //{
+    //    spawnPoint = GameObject.Find("enemySpawnPoint").GetComponent<EnemySpawnPoint>();
+    //    myTower = GameObject.Find("MyTower").GetComponent<MyTower>();
+    //}
+
     private IEnumerator SpawnRoutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(spawnDelay);
-            Instantiate(enemyprefab, spawnPoint.transform.position, Quaternion.Euler(0, 0, 0));
+             Instantiate(enemyprefab, spawnPoint.transform.position, Quaternion.Euler(0, 0, 0));
         }
 
     }

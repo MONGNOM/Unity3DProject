@@ -7,6 +7,8 @@ public class EnemyTower : MonoBehaviour
 {
     [SerializeField]
     private int maxhp;
+
+    [SerializeField]
     private int curhp;
 
     [SerializeField]
@@ -15,8 +17,10 @@ public class EnemyTower : MonoBehaviour
     [SerializeField]
     private TeamMonster teamMonster;
 
+    public FireballShot ball;
 
 
+        
     private void Start()
     {
         curhp = maxhp;
@@ -45,14 +49,17 @@ public class EnemyTower : MonoBehaviour
     }
     private void TakeHit()
     {
+        curhp -= ball.damage;
         curhp -= teamMonster.damage;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Enemy")
-            Debug.Log("우리팀 몬스터가 상대 타워를 공격하고 있다.");
+        if (collision.collider.tag == "TeamMonster")
+        { 
             TakeHit();
+            Debug.Log("상대타워부시는중");
+        }
     }
 
 }

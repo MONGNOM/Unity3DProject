@@ -15,19 +15,24 @@ public class PlayerStateUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI HeartlValue;
 
+    
+    //private void Update()
+    //{
+    //    levelValue = GameObject.Find("LevelValue").GetComponent<TextMeshProUGUI>();
+    //    MineralValue = GameObject.Find("MineralValue").GetComponent<TextMeshProUGUI>();
+    //    HeartlValue = GameObject.Find("HpValue").GetComponent<TextMeshProUGUI>();
 
-    private void Update()
+    //    ChangeHeart(WaveManager.Instance.Heart);
+    //    ChangeMineral(SpawnManager.Instance.Mineral);
+    //    ChangeLevel(WaveManager.Instance.Level);
+    //}
+    private void Start()
     {
         levelValue = GameObject.Find("LevelValue").GetComponent<TextMeshProUGUI>();
         MineralValue = GameObject.Find("MineralValue").GetComponent<TextMeshProUGUI>();
         HeartlValue = GameObject.Find("HpValue").GetComponent<TextMeshProUGUI>();
 
-        ChangeHeart(WaveManager.Instance.Heart);
-        ChangeMineral(SpawnManager.Instance.Mineral);
-        ChangeLevel(WaveManager.Instance.Level);
-    }
-    private void Start()
-    {
+
         WaveManager.Instance.OnChangeHeart += ChangeHeart;
         WaveManager.Instance.OnChangeLevel += ChangeLevel;
         SpawnManager.Instance.OnChangeMineral += ChangeMineral;

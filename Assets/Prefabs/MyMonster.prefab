@@ -2029,9 +2029,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badc081a506eb184aae9956f72c32eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 5000
+  maxhp: 110000
   curhp: 0
-  damage: 100
+  damage: 20
   range: 20
   fireRagte: 20
   mineral: 30
@@ -2040,13 +2040,15 @@ MonoBehaviour:
   dieTime: 0
   enemyTower: {fileID: 0}
   unitMarker: {fileID: 2075283082425271775}
+  target: {fileID: 0}
   fireball: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   ground:
     serializedVersion: 2
     m_Bits: 0
   die: 0
-  marine: 0
+  command: {fileID: 0}
+  attackmarine: {fileID: 0}
   maekfireball: 0
   Takehit: 0
   ball: {fileID: 7546247757986920195, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
@@ -2060,7 +2062,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4.5
+  m_Speed: 30
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2122,6 +2124,8 @@ MonoBehaviour:
     m_Bits: 4096
   teamMonster: {fileID: 0}
   anim: {fileID: 0}
+  attackmarine: {fileID: 6402841878565547676}
+  command: {fileID: 0}
   playerview: {fileID: 0}
 --- !u!114 &6402841878565547676
 MonoBehaviour:
@@ -2137,6 +2141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monster: {fileID: 1113278573729469852}
   unit: {fileID: 3350334759876284454}
+  marine: 0
 --- !u!114 &-168164042649526166
 MonoBehaviour:
   m_ObjectHideFlags: 0

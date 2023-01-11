@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     //[SerializeField]
     //private int mineral;
 
+    [SerializeField]
     public FireballShot ball;
 
     private WaveManager waveManager;

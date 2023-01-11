@@ -6,6 +6,8 @@ public class Attackmarine : MonoBehaviour,ICommandable
 {
     public TeamMonster monster;
     public UnitMovement unit;
+    public bool marine;
+
 
     public Attackmarine (TeamMonster monster, UnitMovement unit)
     {
@@ -15,7 +17,7 @@ public class Attackmarine : MonoBehaviour,ICommandable
 
     public void Update()
     {
-        monster.marine = true;
+        marine = true;
     }
 
     public void Execute()
@@ -28,7 +30,7 @@ public class Attackmarine : MonoBehaviour,ICommandable
     public void MarineAttack()
     {
         monster.attack = true;
-        monster.marine = true;
+        marine = true;
         
     }
 }

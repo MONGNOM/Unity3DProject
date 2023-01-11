@@ -6,15 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class sceneRpg : MonoBehaviour
 {
-    private Scene scene;
-
-    private void Awake()
+    private void OnTriggerExit(Collider other)
     {
-        scene = GetComponent<Scene>();
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Rpg 맵으로 이동합니다");
-        SceneManager.LoadScene("GameRPG_Town");
+        if (other.tag == "Player")
+        {
+            Debug.Log("Rpg 맵으로 이동합니다");
+            LodingSceneController.LoadScene("GameRPG_Town");
+        }
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -34,6 +36,7 @@ public class TeamMonster : MonoBehaviour
 
     [SerializeField]
     public GameObject unitMarker;
+    [SerializeField]
     private Enemy target;
 
     private UnitMovement move;
@@ -47,7 +50,9 @@ public class TeamMonster : MonoBehaviour
 
     public bool die;
 
-    public bool marine;
+    public AttackMoveCommand command;
+
+    public Attackmarine attackmarine;
 
     public bool maekfireball;
 
@@ -59,7 +64,9 @@ public class TeamMonster : MonoBehaviour
 
     private void Awake()
     {
-        
+
+        command = GetComponent<AttackMoveCommand>();
+        attackmarine = GetComponent<Attackmarine>();
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         curhp = maxhp;
@@ -70,6 +77,7 @@ public class TeamMonster : MonoBehaviour
     {
         enemyTower = GameObject.FindGameObjectWithTag("EnemyTower").GetComponent<EnemyTower>();
         target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
+        
         UnitSelection.Instance.unitList.Add(this.gameObject);
         attack = true;
         die = false;
@@ -91,7 +99,7 @@ public class TeamMonster : MonoBehaviour
 
     private void OnDestroy()
     {
-        UnitSelection.Instance.unitList.Remove(this.gameObject);    
+        UnitSelection.Instance.unitList.Remove(this.gameObject);
     }
 
 
@@ -102,20 +110,24 @@ public class TeamMonster : MonoBehaviour
         if (attack)
         {
             target = null;
+            enemyTower = null;
             Collider[] colliders = Physics.OverlapSphere(transform.position, range);
             for (int i = 0; i < colliders.Length; i++)
             {
                 target = colliders[i].GetComponent<Enemy>();
-                if (null != target && !marine)
+                enemyTower = colliders[i].GetComponent<EnemyTower>();
+
+                if (null != target && null != command)
                 {
+                    Debug.Log("X");
                     Attack();
                     gameObject.transform.LookAt(target.transform.position);
                     agent.destination = target.transform.position;
                     break;
                 }
-                else if (null != target && marine)
+                else if (null != target && null != attackmarine)
                 {
-
+                    Debug.Log("파이어볼 생성");
                     agent.isStopped = true;
                     Takehit = false;
                     maekfireball = true;
@@ -124,7 +136,29 @@ public class TeamMonster : MonoBehaviour
                     gameObject.transform.LookAt(target.transform.position);
                     break;
                 }
+                else if (null != enemyTower && null != command)
+                {
+                    Debug.Log("X");
+                    Attack();
+                    gameObject.transform.forward = enemyTower.transform.position;
+                    gameObject.transform.LookAt(enemyTower.transform.position);
+                    agent.destination = enemyTower.transform.position;
+                    break;
 
+                }
+                else if (null != enemyTower && null != attackmarine)
+                {
+                    Debug.Log("파이어볼 생성");
+                    agent.isStopped = true;
+                    Takehit = false;
+                    maekfireball = true;
+                    Attack();
+                    gameObject.transform.forward = enemyTower.transform.position;
+                    gameObject.transform.LookAt(enemyTower.transform.position);
+                    break;
+                }
+                else
+                    agent.destination = move.detination;
             }
         }
         else
@@ -139,7 +173,7 @@ public class TeamMonster : MonoBehaviour
     public void TakeHit()
     {
         Takehit = true;
-        curhp -= target.damage;
+        curhp -= target.damage; 
         anim.SetTrigger("TakeHit");
     }
 
