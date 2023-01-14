@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,89 +18,86 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float range;
     [SerializeField]
+    private float attackrange;
+    [SerializeField]
     private float fireRagte;
     //[SerializeField]
     //private int mineral;
 
+    public Animator anim;
     [SerializeField]
     public FireballShot ball;
 
-    private WaveManager waveManager;
+    public MeleeAttackMonster meleeAttack;
 
-    private TeamMonster target;
+    public RangedAttackMonster rangedAttack;
+
+    [SerializeField]
+    private Weapon realSwored;
+
 
     public int Damage { get { return damage; } private set { damage = value; } }
 
     [SerializeField]
-    private MyTower tower;
+    public MyTower tower;
+    [SerializeField]
+    public TeamMonster teamMonster;
 
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
 
-    
+    public PlayerController playerController;
+
+
+    public Enemy(RangedAttackMonster rangedAttack)
+    { 
+        this.rangedAttack = rangedAttack;
+    }
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         curhp = maxhp;
+        anim = GetComponent<Animator>();
+
 
     }
-
-    public void Start()
+    private void Start()
     {
         tower = GameObject.FindGameObjectWithTag("MyTower").GetComponent<MyTower>();
-        //target = GameObject.FindGameObjectWithTag("TeamMonster").GetComponent<TeamMonster>();
-
+        agent.destination = tower.transform.position;
     }
 
-    private void Update()
+ 
+
+    private void TakeHit(int damage)
     {
-        FindTarget();
-        Die();
+        curhp -= damage;
     }
 
-    private void FindTarget()
+   
+
+
+    public void OnCollisionEnter(Collision collision)
     {
-        target = null;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-        for (int i = 0; i < colliders.Length; i++)
+        if (collision.collider.tag == "RangedAttack")
         {
-            target = colliders[i].GetComponent<TeamMonster>();
-            if (null != target)
-            {
-                gameObject.transform.LookAt(target.transform.position);
-                agent.destination = target.transform.position;
-                break;
-            }
-            else
-            {
-                agent.destination = tower.transform.position;
-            }
+            FireballShot ball = collision.gameObject.GetComponent<FireballShot>();
+            TakeHit(ball.damage);
+        }
+        else if (collision.collider.tag == "TeamMonster")
+        {
+            Debug.Log("근접공격한테 맞았다");
+            MeleeAttackMonster attack = collision.gameObject.GetComponent<MeleeAttackMonster>();
+            TakeHit(attack.damage);
+
         }
     }
-    private void TakeHit()
-    {
-        if (ball)
-        curhp -= ball.damage;
-        else
-        curhp -= target.damage;
-    }
 
-    private void Die()
+    private void OnDrawGizmosSelected()
     {
-        if (curhp <= 0)
-        {
-            SpawnManager.Instance.GainMineral(10);
-            Destroy(gameObject);
-        }
-    }
-    private void Attack()
-    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(gameObject.transform.position,range);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(gameObject.transform.position,attackrange);
 
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag == "TeamMonster")
-            TakeHit();
-    }
-
-
 }

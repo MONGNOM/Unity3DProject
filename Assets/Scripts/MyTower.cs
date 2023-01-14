@@ -15,10 +15,7 @@ public class MyTower : MonoBehaviour
 
     public int Mineral { get { return mineral; } private set { mineral = value; } }
 
-    private void Start()
-    {
-        target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
-    }
+   
     private void Update()
     {
         GameOver();

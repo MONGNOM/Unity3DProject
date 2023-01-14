@@ -6,14 +6,15 @@ using UnityEngine;
 public class FireballShot : MonoBehaviour
 {
     public Enemy target;
-    public TeamMonster monster;
+    public RangedAttackMonster rangedAttack;
     public float shotSpeed;
     public float deleteTime;
     public int damage;
 
+   
     private void Start()
     {
-        damage = monster.damage;    
+        damage = rangedAttack.damage;    
     }
     public FireballShot(Enemy target)
     {

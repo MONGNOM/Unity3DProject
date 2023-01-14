@@ -71,6 +71,7 @@ public class SpawnManager : SingleTon<SpawnManager>
     public void GainMineral(int mineral)
     {
         Mineral += mineral;
+        Debug.Log(mineral+"¿ª ≈âµÊ«ﬂΩ¿¥œ¥Ÿ.");
     }
 
     public void LevelMineral()

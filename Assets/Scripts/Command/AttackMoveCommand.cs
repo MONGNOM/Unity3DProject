@@ -7,28 +7,26 @@ public class AttackMoveCommand : MonoBehaviour,ICommandable
 {
     public TeamMonster teamMonster;
     public UnitMovement unitMovement;
-    public bool attack;
-    public AttackMoveCommand(UnitMovement unitMovement, TeamMonster teamMonster)
+    public MeleeAttackMonster meleeAttack;
+    public AttackMoveCommand(UnitMovement unitMovement, TeamMonster teamMonster, MeleeAttackMonster meleeAttack)
     {
         this.teamMonster = teamMonster;
         this.unitMovement = unitMovement;
+        this.meleeAttack = meleeAttack; 
     }
 
-    private void Update()
-    {
-        attack = true;
-    }
+    
     public void Execute()
     {
-        Attack();
+        if (meleeAttack.enemyTower || meleeAttack.target)
+            Attack();
+        else
+            return;
     }
 
     
     void Attack()
     {
-        attack = true;
-        unitMovement.agent.isStopped = false;
-        teamMonster.attack = true; // 공격 가능
-        Debug.Log("몬스터가 공격하면서 목표 지점으로 이동합니다");
+        teamMonster.anim.SetTrigger("Attack");
     }
 }

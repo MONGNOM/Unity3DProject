@@ -20,9 +20,10 @@ public class UnitMovement : MonoBehaviour
     public Animator anim;
     public Attackmarine attackmarine;
     public AttackMoveCommand command;
-
+    public RangedAttackMonster rangedAttack;
     [SerializeField]
     public PlayerViewr playerview;
+    public MeleeAttackMonster meleeAttack;
    
 
     ICommandable buttonS, buttonH, buttonA, buttona;
@@ -38,11 +39,12 @@ public class UnitMovement : MonoBehaviour
         playerview = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerViewr>();
         agent = GetComponent<NavMeshAgent>();
         teamMonster = GetComponent<TeamMonster>();
+        rangedAttack = GetComponent<RangedAttackMonster>();
+        meleeAttack = GetComponent<MeleeAttackMonster>();
 
         buttonS = new StopMoveCommand(this,teamMonster);
         buttonH = new HoldMoveCommand(this,teamMonster);
-        buttonA = new AttackMoveCommand(this, teamMonster);
-        buttona = new Attackmarine(teamMonster,this);
+        buttonA = new AttackMoveCommand(this, teamMonster, meleeAttack);
     }
 
     // Update is called once per frame
@@ -58,7 +60,6 @@ public class UnitMovement : MonoBehaviour
         else if (Input.GetKey("a") && Input.GetMouseButtonDown(0))
         {
             buttonA.Execute();
-            buttona.Execute();
         }
     }
 
@@ -81,7 +82,6 @@ public class UnitMovement : MonoBehaviour
                 detination = hit.point;
                 agent.destination = detination;
                 anim.SetTrigger("Walk");
-                Debug.Log("몬스터가 출발합니다.");
             }
 
         }
@@ -101,7 +101,6 @@ public class UnitMovement : MonoBehaviour
                 detination = hit.point;
                 agent.destination = detination;
                 anim.SetTrigger("Walk");
-                Debug.Log("몬스터가 출발합니다.");
             }
         }
 
@@ -114,10 +113,9 @@ public class UnitMovement : MonoBehaviour
 
         if (sqrlen < agent.speed * agent.speed)
         {
-            teamMonster.attack = true;
             agent.ResetPath();
+            teamMonster.attack = true;
             agent.velocity = Vector3.zero;
-           // Debug.Log("몬스터가 목적지를 잃었다.");
         }
     }
 

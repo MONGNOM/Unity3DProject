@@ -7,16 +7,20 @@ public class Fireball : MonoBehaviour
 {
     public UnityEvent fireball;
 
-    public TeamMonster monster;
+    public RangedAttackMonster rangedAttack;
 
-    public Fireball(TeamMonster monster)
+    private void Awake()
+    {
+        rangedAttack = GetComponent<RangedAttackMonster>();
+    }
+    public Fireball(RangedAttackMonster rangedAttack)
     { 
-        this.monster = monster;
+        this.rangedAttack = rangedAttack;
     }
 
     private void Update() 
     {
-        if (monster.maekfireball )
+        if (rangedAttack.maekfireball)
         fireball?.Invoke();
     }
 }

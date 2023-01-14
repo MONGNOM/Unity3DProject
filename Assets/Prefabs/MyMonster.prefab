@@ -1961,14 +1961,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2879873121588154211}
   - component: {fileID: 2788620228107786387}
-  - component: {fileID: 1113278573729469852}
+  - component: {fileID: -1807393480378322486}
+  - component: {fileID: 2410806013907019572}
   - component: {fileID: 3418243981050053189}
   - component: {fileID: 3151444993021290039}
   - component: {fileID: 3107342070877439087}
   - component: {fileID: 3350334759876284454}
   - component: {fileID: 6402841878565547676}
   - component: {fileID: -168164042649526166}
-  - component: {fileID: 2410806013907019572}
   m_Layer: 11
   m_Name: MyMonster
   m_TagString: Untagged
@@ -2017,7 +2017,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1113278573729469852
+--- !u!114 &-1807393480378322486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2026,31 +2026,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 2874354795402153895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: badc081a506eb184aae9956f72c32eab, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b7a432f9d6d84442b7d5a7c37a82e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 110000
+  agent: {fileID: 0}
+  maxhp: 1000
   curhp: 0
-  damage: 20
-  range: 20
-  fireRagte: 20
-  mineral: 30
+  mineral: 50
   icon: {fileID: 21300000, guid: a054c1c88fc11d94bb30680a572de873, type: 3}
   attack: 0
+  anim: {fileID: 0}
   dieTime: 0
-  enemyTower: {fileID: 0}
   unitMarker: {fileID: 2075283082425271775}
-  target: {fileID: 0}
+  move: {fileID: 0}
   fireball: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   ground:
     serializedVersion: 2
     m_Bits: 0
   die: 0
-  command: {fileID: 0}
-  attackmarine: {fileID: 0}
-  maekfireball: 0
+  target: {fileID: 0}
   Takehit: 0
+  unit: {fileID: 0}
+  damage: 100
+  range: 20
+  fireRagte: 20
+  enemyTower: {fileID: 0}
+  maekfireball: 0
+--- !u!114 &2410806013907019572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2874354795402153895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56234c4024749d43b90b6a50e4b608d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireBall: {fileID: 6500326551262403817, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
+  attackMarine: {fileID: 8379910466939183066}
+  makeFireTiem: 2
+  deleteTime: 3
+  rangedAttack: {fileID: 0}
   ball: {fileID: 7546247757986920195, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
 --- !u!195 &3418243981050053189
 NavMeshAgent:
@@ -2126,6 +2145,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   attackmarine: {fileID: 6402841878565547676}
   command: {fileID: 0}
+  rangedAttack: {fileID: 0}
   playerview: {fileID: 0}
 --- !u!114 &6402841878565547676
 MonoBehaviour:
@@ -2139,9 +2159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad796d501ef241f4ab44051eb73144c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1113278573729469852}
-  unit: {fileID: 3350334759876284454}
-  marine: 0
+  monster: {fileID: 0}
+  rangedAttack: {fileID: 0}
 --- !u!114 &-168164042649526166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2169,25 +2188,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  monster: {fileID: 1113278573729469852}
---- !u!114 &2410806013907019572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2874354795402153895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e56234c4024749d43b90b6a50e4b608d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireBall: {fileID: 6500326551262403817, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
-  attackMarine: {fileID: 8379910466939183066}
-  makeFireTiem: 2
-  deleteTime: 3
-  TeamMonster: {fileID: 1113278573729469852}
-  ball: {fileID: 7546247757986920195, guid: e7f797441bc7113488b4259b0f86986f, type: 3}
+  rangedAttack: {fileID: -1807393480378322486}
 --- !u!1 &2874374955282560743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,7 +2858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568931bd55573ad4f9902129aa1ddbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 1113278573729469852}
+  monster: {fileID: -1807393480378322486}
   hpbar: {fileID: 8306959611824772520}
 --- !u!1 &9170521935680806665
 GameObject:

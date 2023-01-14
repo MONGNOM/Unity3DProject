@@ -863,12 +863,12 @@ GameObject:
   m_Component:
   - component: {fileID: 912143199642688653}
   - component: {fileID: 1003376722580223753}
-  - component: {fileID: 3171707839461644733}
   - component: {fileID: -234259186964962028}
   - component: {fileID: 7328657282589368540}
   - component: {fileID: 3813006948003803140}
   - component: {fileID: 3935291885466278273}
   - component: {fileID: -5759516667377429757}
+  - component: {fileID: 7751149273092376376}
   m_Layer: 11
   m_Name: MyMonster4
   m_TagString: TeamMonster
@@ -915,41 +915,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3171707839461644733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918131691456899915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: badc081a506eb184aae9956f72c32eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxhp: 100
-  curhp: 0
-  damage: 20
-  range: 10
-  fireRagte: 10
-  mineral: 10
-  icon: {fileID: 21300000, guid: b48a946c769b2c14288115b88b7b7302, type: 3}
-  attack: 0
-  dieTime: 0
-  enemyTower: {fileID: 0}
-  unitMarker: {fileID: 382276061659430127}
-  target: {fileID: 0}
-  fireball: {fileID: 0}
-  destination: {x: 0, y: 0, z: 0}
-  ground:
-    serializedVersion: 2
-    m_Bits: 0
-  die: 0
-  command: {fileID: 0}
-  attackmarine: {fileID: 0}
-  maekfireball: 0
-  Takehit: 0
-  ball: {fileID: 0}
 --- !u!54 &-234259186964962028
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -961,10 +926,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 10
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &7328657282589368540
 CapsuleCollider:
@@ -991,7 +956,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 8
-  m_Acceleration: 8
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -1024,7 +989,9 @@ MonoBehaviour:
   anim: {fileID: 0}
   attackmarine: {fileID: 0}
   command: {fileID: 0}
+  rangedAttack: {fileID: 0}
   playerview: {fileID: 0}
+  meleeAttack: {fileID: 0}
 --- !u!114 &-5759516667377429757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,9 +1004,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc2209e37827b1448a84b65cbbc3238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamMonster: {fileID: 3171707839461644733}
+  teamMonster: {fileID: 0}
   unitMovement: {fileID: 3935291885466278273}
+  meleeAttack: {fileID: 0}
+--- !u!114 &7751149273092376376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918131691456899915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35241d1fd64828489ff9d6bea07dd84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  maxhp: 150
+  curhp: 0
+  mineral: 10
+  icon: {fileID: 21300000, guid: b48a946c769b2c14288115b88b7b7302, type: 3}
   attack: 0
+  anim: {fileID: 0}
+  dieTime: 0
+  unitMarker: {fileID: 0}
+  move: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  die: 0
+  target: {fileID: 0}
+  Takehit: 0
+  unit: {fileID: 0}
+  damage: 30
+  range: 20
+  fireRagte: 1
+  enemyTower: {fileID: 0}
 --- !u!1 &918136976804442311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568931bd55573ad4f9902129aa1ddbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 3171707839461644733}
+  monster: {fileID: 7751149273092376376}
   hpbar: {fileID: 5381036518329329875}
 --- !u!1 &4349022966710325930
 GameObject:

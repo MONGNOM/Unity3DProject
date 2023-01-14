@@ -5,32 +5,36 @@ using UnityEngine;
 public class Attackmarine : MonoBehaviour,ICommandable
 {
     public TeamMonster monster;
-    public UnitMovement unit;
-    public bool marine;
+    public RangedAttackMonster rangedAttack;
 
 
-    public Attackmarine (TeamMonster monster, UnitMovement unit)
+    public Attackmarine (TeamMonster monster, RangedAttackMonster rangedAttack)
     {
         this.monster = monster;
-        this.unit = unit;
+        this.rangedAttack = rangedAttack;
     }
 
-    public void Update()
-    {
-        marine = true;
-    }
+  
 
     public void Execute()
     {
-        MarineAttack();
+        if (rangedAttack.enemyTower || rangedAttack.target)
+            Attack();
+         else
+            return; 
     }
 
-   
-
-    public void MarineAttack()
+    public void Attack()
     {
-        monster.attack = true;
-        marine = true;
-        
+
+        Debug.Log("원거리공격[커맨드 사용]");
+        monster.agent.isStopped = true;
+        monster.Takehit = false;
+        rangedAttack.maekfireball = true;
+        monster.anim.SetTrigger("Attack");
     }
+
+
+
+
 }

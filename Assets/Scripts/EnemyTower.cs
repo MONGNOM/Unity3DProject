@@ -9,7 +9,7 @@ public class EnemyTower : MonoBehaviour
     private int maxhp;
 
     [SerializeField]
-    private int curhp;
+    public int curhp;
 
     [SerializeField]
     private Slider hpbar;
@@ -19,6 +19,8 @@ public class EnemyTower : MonoBehaviour
 
     public FireballShot ball;
 
+    public MeleeAttackMonster meleeattack;
+    public RangedAttackMonster rangedAttack;
 
         
     private void Start()
@@ -47,18 +49,25 @@ public class EnemyTower : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void TakeHit()
+    private void TakeHit(int damage)
     {
-        curhp -= ball.damage;
-        curhp -= teamMonster.damage;
+        curhp -= damage;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "TeamMonster")
-        { 
-            TakeHit();
-            Debug.Log("상대타워부시는중");
+        if (collision.collider.tag == "RangedAttack")
+        {
+            FireballShot fireball = collision.gameObject.GetComponent<FireballShot>();
+            TakeHit(fireball.damage);
+            Debug.Log("원거리 공격이 상대타워부시는중");
+        }
+        else if(collision.collider.tag == "TeamMonster")
+        {
+            MeleeAttackMonster meleeattack = collision.gameObject.GetComponent<MeleeAttackMonster>();
+            TakeHit(meleeattack.damage);
+            Debug.Log("근접공격이 상대타워부시는중");
+
         }
     }
 

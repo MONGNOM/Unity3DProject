@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7546247757986920195}
   m_Layer: 0
   m_Name: Fireball
-  m_TagString: TeamMonster
+  m_TagString: RangedAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: -7139151564131793180, guid: dbae903b99f91b745a0b33c0c087685f, type: 3}
-  monster: {fileID: 1113278573729469852, guid: ef5417d4cff1a734aa2c793ab186d072, type: 3}
+  rangedAttack: {fileID: -1807393480378322486, guid: ef5417d4cff1a734aa2c793ab186d072, type: 3}
   shotSpeed: 20
   deleteTime: 0
-  damage: 0
+  damage: 5

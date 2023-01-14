@@ -9,12 +9,12 @@ public class MakeFireBall : MonoBehaviour
     public Transform attackMarine;
     public float makeFireTiem;
     public float deleteTime;
-    public TeamMonster TeamMonster;
+    public RangedAttackMonster rangedAttack;
     public FireballShot ball;
 
     private void Awake()
     {
-        TeamMonster = GetComponent<TeamMonster>();
+        rangedAttack = GetComponent<RangedAttackMonster>();
     }
 
     public void MakeFireball()

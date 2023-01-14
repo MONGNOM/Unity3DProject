@@ -49,7 +49,11 @@ public class PlayerController : MonoBehaviour
     public bool playerBattle;
 
     public MiniMapController minimap;
-    
+
+    public Weapon realSword;
+
+    public EnemyTower enemyTower;
+
 
 
     private void Awake()
@@ -67,7 +71,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
-
         weapon.HideSword();
         weaponhouse.HideSword();
         rtsMove = true;
@@ -140,17 +143,19 @@ public class PlayerController : MonoBehaviour
     public void OnAttackHit()
     {
         // 1. 범위내에 있는가?
-        Collider[] collders = Physics.OverlapSphere(transform.position, attackRange);
-        for (int i = 0; i < collders.Length; i++)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+        for (int i = 0; i < colliders.Length; i++)
         {
-            Vector3 dirToTarget = (collders[i].transform.position - transform.position).normalized;
+            Vector3 dirToTarget = (colliders[i].transform.position - transform.position).normalized;
             Vector3 rightDir = AngleToDir(transform.eulerAngles.y + attackAngle * 0.5f);
 
             // 2. 각도내에 있는가?
             if (Vector3.Dot(transform.forward, dirToTarget) > Vector3.Dot(transform.forward, rightDir))
-            { 
-                if (collders[i].gameObject.tag == "Enemy")
-                    Destroy(collders[i].gameObject);
+            {
+                if (colliders[i].gameObject.tag == "Enemy") // 나중에 데미저블 컴포넌트 가지고 있는 애들만 데미지 주는 걸로 구현
+                    colliders[i].gameObject.GetComponent<Enemy>().curhp -= realSword.damage;
+                else if(colliders[i].gameObject.tag == "EnemyTower")
+                    colliders[i].gameObject.GetComponent<EnemyTower>().curhp -= realSword.damage;
             }
         }
 
@@ -158,12 +163,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackStart()
     {
-       // weapon.EnableWeapon();
+        weapon.EnableWeapon();
     }
 
     public void OnAttackEnd()
     {
-       // weapon.DisableWeapon();
+        weapon.DisableWeapon();
     }
 
     public void Move()

@@ -6,6 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class sceneRpg : MonoBehaviour
 {
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            LodingSceneController.LoadScene("OrcCampScene");
+
+        }
+
+
+
+
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")

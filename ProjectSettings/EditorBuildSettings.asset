@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LodingScene.unity
     guid: ba0a91ba1cf7ab94b9100147a889f01c
+  - enabled: 1
+    path: Assets/Scenes/OrcCampScene.unity
+    guid: be70380662404c540890157e1a75f5a6
   m_configObjects: {}

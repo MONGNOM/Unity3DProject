@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Scene : SingleTon<Scene>
 {
-    private void OnTriggerExit(Collider other)
+ 
+private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {

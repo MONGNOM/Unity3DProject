@@ -25,13 +25,11 @@ public class WeaponHand : MonoBehaviour
     public void EnableWeapon()
     {
         sword.collider.enabled = true;
-        Debug.Log("Ä® ÄÑÁü");
     }
 
     public void DisableWeapon()
     { 
         sword.collider.enabled = false;
-        Debug.Log("Ä® ²¨Áü");
     }
 
 
