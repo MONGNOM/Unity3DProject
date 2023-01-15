@@ -15,7 +15,7 @@ public class MyTower : MonoBehaviour
 
     public int Mineral { get { return mineral; } private set { mineral = value; } }
 
-   
+        
     private void Update()
     {
         GameOver();

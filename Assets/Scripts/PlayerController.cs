@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
@@ -10,13 +11,15 @@ enum playerstate { Normal, Battle }
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-     playerstate state;
+    playerstate state;
 
     private Animator anim;
 
+   
+
     [SerializeField]
     private float attackRange;
-    [SerializeField, Range(0f,360f)]
+    [SerializeField, Range(0f, 360f)]
     private float attackAngle;
 
     [SerializeField]
@@ -54,18 +57,19 @@ public class PlayerController : MonoBehaviour
 
     public EnemyTower enemyTower;
 
+ 
+
+
+    
 
 
     private void Awake()
     {
-
         playerview = GetComponent<PlayerViewr>();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         //minimap = GameObject.Find("MiniMap_Cam").GetComponent<MiniMapController>();
         //canvas = GameObject.Find("StarCraftCanvus").GetComponent<Canvas>();
-
-
     }
 
     private void Start()
@@ -79,6 +83,19 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown("1"))
+        {
+            PlayerStatusManager.Instance.TakeHit(10);
+        }
+        else if (Input.GetKeyDown("2"))
+        {
+            PlayerStatusManager.Instance.Levelup(1);
+        }
+        else if (Input.GetKeyDown("3"))
+        {
+            PlayerStatusManager.Instance.ExpUp(5);
+        }
+
 
         changeTime -= Time.deltaTime;
         if (changeTime <= 0)
@@ -103,6 +120,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void TakeHit(int damage)
+    {
+        PlayerStatusManager.Instance.TakeHit(damage);
+    }
 
     public void ChangeMode()
     {
@@ -136,10 +157,9 @@ public class PlayerController : MonoBehaviour
         if (!Input.GetMouseButtonDown(0)) return;
 
         anim.SetTrigger("Attack");
-        //anim.SetLayerWeight(2, 1);
    
-
     }
+
     public void OnAttackHit()
     {
         // 1. 범위내에 있는가?
@@ -232,5 +252,14 @@ public class PlayerController : MonoBehaviour
     {
         float raidan = angle * Mathf.Deg2Rad;
         return new Vector3(Mathf.Sin(raidan), 0, Mathf.Cos(raidan));
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Enemy")
+        { 
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+        TakeHit(enemy.damage);
+        }
     }
 }

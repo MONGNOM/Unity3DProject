@@ -65,7 +65,7 @@ public class WaveManager : SingleTon<WaveManager>
     }
 
     public void LevelUp(int level)
-    {
+    {   
         Level += level;
         
     }
