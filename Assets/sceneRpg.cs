@@ -11,7 +11,7 @@ public class sceneRpg : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            LodingSceneController.LoadScene("OrcCampScene");
+            LodingSceneController.LoadScene("OrcTestScene");
 
         }
 

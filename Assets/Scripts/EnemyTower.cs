@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class EnemyTower : MonoBehaviour
 {
     [SerializeField]
-    private int maxhp;
+    private float maxhp;
 
     [SerializeField]
-    public int curhp;
+    public float curhp;
 
     [SerializeField]
     private Slider hpbar;

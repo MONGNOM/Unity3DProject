@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
 
-   
+
+    
 
     [SerializeField]
     private float attackRange;
@@ -57,12 +58,7 @@ public class PlayerController : MonoBehaviour
 
     public EnemyTower enemyTower;
 
- 
-
-
-    
-
-
+    public RpgEnemy rpgEnemy;
     private void Awake()
     {
         playerview = GetComponent<PlayerViewr>();
@@ -80,6 +76,7 @@ public class PlayerController : MonoBehaviour
         rtsMove = true;
         playermove = true;
         state = playerstate.Normal;
+        rpgEnemy = GameObject.FindGameObjectWithTag("RpgEnemy").GetComponent<RpgEnemy>();
     }
     private void Update()
     {
@@ -89,7 +86,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown("2"))
         {
-            PlayerStatusManager.Instance.Levelup(1);
+            PlayerStatusManager.Instance.Levelup();
         }
         else if (Input.GetKeyDown("3"))
         {
@@ -157,7 +154,9 @@ public class PlayerController : MonoBehaviour
         if (!Input.GetMouseButtonDown(0)) return;
 
         anim.SetTrigger("Attack");
-   
+        
+
+
     }
 
     public void OnAttackHit()
@@ -174,8 +173,14 @@ public class PlayerController : MonoBehaviour
             {
                 if (colliders[i].gameObject.tag == "Enemy") // 나중에 데미저블 컴포넌트 가지고 있는 애들만 데미지 주는 걸로 구현
                     colliders[i].gameObject.GetComponent<Enemy>().curhp -= realSword.damage;
-                else if(colliders[i].gameObject.tag == "EnemyTower")
+                else if (colliders[i].gameObject.tag == "EnemyTower")
                     colliders[i].gameObject.GetComponent<EnemyTower>().curhp -= realSword.damage;
+                else if (colliders[i].gameObject.tag == "RpgEnemy")
+                {
+                    colliders[i].gameObject.GetComponent<RpgEnemy>().curHp -= realSword.damage;
+                    rpgEnemy.anim.SetTrigger("TakeHit");
+                    Debug.Log("트리거들어옴");
+                }
             }
         }
 

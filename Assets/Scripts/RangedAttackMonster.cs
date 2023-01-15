@@ -30,7 +30,9 @@ public class RangedAttackMonster : TeamMonster
 
     private void Update()
     {
-        if (!die)
+        if (base.curhp <= 0)
+            base.Die();
+        else
             FindTarget();
     }
     protected void FindTarget()

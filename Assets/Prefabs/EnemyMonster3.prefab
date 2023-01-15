@@ -818,7 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxhp: 1000
   curhp: 0
-  damage: 1
+  damage: 100
   range: 20
   attackrange: 2
   fireRagte: 20

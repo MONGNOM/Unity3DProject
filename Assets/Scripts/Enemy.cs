@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour
 
     [Header("Spec")]
     [SerializeField]
-    public int maxhp;
-    public int curhp;
+    public float maxhp;
+    public float curhp;
     [SerializeField]
     public int damage;
     [SerializeField]

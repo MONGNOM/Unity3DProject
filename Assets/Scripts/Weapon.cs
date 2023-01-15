@@ -6,7 +6,10 @@ public class Weapon : MonoBehaviour
 {
     public new Collider collider;
 
-    public int damage;
+    public float damage;
+
+    public float Damage
+    { get { return damage; } private set { damage = value; } }
 
     private void Awake()
     {

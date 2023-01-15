@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RpgPlayerstatusUi : MonoBehaviour
 {
+    
 
     [SerializeField]
     private TextMeshProUGUI hpValue;
@@ -16,8 +18,6 @@ public class RpgPlayerstatusUi : MonoBehaviour
 
     private void Start()
     {
-
-
         PlayerStatusManager.Instance.expAction += ChangeRpgExp;
         PlayerStatusManager.Instance.hpAction += ChangeRpgHp;
         PlayerStatusManager.Instance.levelAction += ChangeRpgLevel;
@@ -26,18 +26,17 @@ public class RpgPlayerstatusUi : MonoBehaviour
         ChangeRpgHp(PlayerStatusManager.Instance.HP);
         ChangeRpgLevel(PlayerStatusManager.Instance.Level);
     }
-    
-
+   
     private void ChangeRpgLevel(int level)
     { 
         levelValue.text = level.ToString();
     }
-    private void ChangeRpgHp(int hp)
+    private void ChangeRpgHp(float hp)
     {
         hpValue.text = hp.ToString();
 
     }
-    private void ChangeRpgExp(int exp)
+    private void ChangeRpgExp(float exp)
     {
         expValue.text = exp.ToString();
     }

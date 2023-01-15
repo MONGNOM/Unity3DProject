@@ -16,6 +16,7 @@ TagManager:
   - Hand
   - RealSword
   - RangedAttack
+  - RpgEnemy
   layers:
   - Default
   - TransparentFX
