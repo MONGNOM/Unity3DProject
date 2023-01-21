@@ -15,6 +15,7 @@ public class PlayerStateUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI HeartlValue;
 
+
     
     //private void Update()
     //{

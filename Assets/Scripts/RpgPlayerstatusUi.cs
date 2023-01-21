@@ -14,6 +14,8 @@ public class RpgPlayerstatusUi : MonoBehaviour
     private TextMeshProUGUI expValue;
     [SerializeField]
     private TextMeshProUGUI levelValue;
+    [SerializeField]
+    private TextMeshProUGUI mpValue;
 
 
     private void Start()
@@ -21,12 +23,16 @@ public class RpgPlayerstatusUi : MonoBehaviour
         PlayerStatusManager.Instance.expAction += ChangeRpgExp;
         PlayerStatusManager.Instance.hpAction += ChangeRpgHp;
         PlayerStatusManager.Instance.levelAction += ChangeRpgLevel;
-
+        PlayerStatusManager.Instance.mpAction += ChangeRpgMp;
+    }
+    private void Update()
+    {
         ChangeRpgExp(PlayerStatusManager.Instance.Exp);
         ChangeRpgHp(PlayerStatusManager.Instance.HP);
         ChangeRpgLevel(PlayerStatusManager.Instance.Level);
+        ChangeRpgMp(PlayerStatusManager.Instance.MP);
     }
-   
+
     private void ChangeRpgLevel(int level)
     { 
         levelValue.text = level.ToString();
@@ -39,5 +45,9 @@ public class RpgPlayerstatusUi : MonoBehaviour
     private void ChangeRpgExp(float exp)
     {
         expValue.text = exp.ToString();
+    }
+    private void ChangeRpgMp(float mp)
+    {
+        mpValue.text = mp.ToString();
     }
 }

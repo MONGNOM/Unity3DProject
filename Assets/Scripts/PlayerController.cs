@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 enum playerstate { Normal, Battle }
 [RequireComponent(typeof(CharacterController))]
@@ -15,13 +16,25 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
 
+    [SerializeField]
+    private Rigidbody rb;
 
-    
-
+    [Header("Attack")]
+    [SerializeField]
+    private bool AttackGizmo;
     [SerializeField]
     private float attackRange;
     [SerializeField, Range(0f, 360f)]
     private float attackAngle;
+
+    [Header("InterAction")]
+    [SerializeField]
+    private bool interActionGizmo;
+    [SerializeField]
+    private float interActionkRange;
+    [SerializeField, Range(0f, 360f)]
+    private float interActionAngle;
+
 
     [SerializeField]
     private float movespeed;
@@ -59,6 +72,9 @@ public class PlayerController : MonoBehaviour
     public EnemyTower enemyTower;
 
     public RpgEnemy rpgEnemy;
+
+
+
     private void Awake()
     {
         playerview = GetComponent<PlayerViewr>();
@@ -76,22 +92,16 @@ public class PlayerController : MonoBehaviour
         rtsMove = true;
         playermove = true;
         state = playerstate.Normal;
-        rpgEnemy = GameObject.FindGameObjectWithTag("RpgEnemy").GetComponent<RpgEnemy>();
+        //rpgEnemy = GameObject.FindGameObjectWithTag("RpgEnemy").GetComponent<RpgEnemy>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown("1"))
-        {
-            PlayerStatusManager.Instance.TakeHit(10);
-        }
-        else if (Input.GetKeyDown("2"))
+        
+        if (Input.GetKeyDown("0"))
         {
             PlayerStatusManager.Instance.Levelup();
         }
-        else if (Input.GetKeyDown("3"))
-        {
-            PlayerStatusManager.Instance.ExpUp(5);
-        }
+   
 
 
         changeTime -= Time.deltaTime;
@@ -104,6 +114,7 @@ public class PlayerController : MonoBehaviour
                 Move();
                 ChangeMode();
                 Jump();
+                InterAction();
                 break;
     
             case playerstate.Battle:
@@ -111,10 +122,34 @@ public class PlayerController : MonoBehaviour
                 Jump(); 
                 Attack();
                 ChangeMode();
+                InterAction();
                 // 구르기 구현
                 break;
         }
 
+    }
+
+
+    public void InterAction()
+    {
+        if (!Input.GetButtonDown("InterAction")) 
+            return;
+
+        // 1. 범위내에 있는가?
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interActionkRange);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            Vector3 dirToTarget = (colliders[i].transform.position - transform.position).normalized;
+            Vector3 rightDir = AngleToDir(transform.eulerAngles.y + interActionAngle * 0.5f);
+
+            // 2. 각도내에 있는가?
+            if (Vector3.Dot(transform.forward, dirToTarget) > Vector3.Dot(transform.forward, rightDir))
+            {
+                IInteractable target = colliders[i].GetComponent<IInteractable>();
+                target?.InterAction(this);
+              
+            }
+        }
     }
 
     public void TakeHit(int damage)
@@ -181,6 +216,11 @@ public class PlayerController : MonoBehaviour
                     rpgEnemy.anim.SetTrigger("TakeHit");
                     Debug.Log("트리거들어옴");
                 }
+                else if (colliders[i].gameObject.tag == "RpgBoss")
+                {
+                    colliders[i].gameObject.GetComponent<RpgEnemy>().curHp -= realSword.damage;
+                    rpgEnemy.anim.SetTrigger("TakeHit");
+                }
             }
         }
 
@@ -230,27 +270,65 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump()
     {
+        // 점프가 이상하다
         if (!rtsMove) return;
 
-        anim.SetFloat("YSpeed", SpeedY);
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    if (Physics.Raycast(transform.position, Vector2.down, out hit, 0.5f, LayerMask.GetMask("Ground")))
+        //    {
+        //        //땅에있다
+        //        rb.AddForce(Vector3.up * jumpPower,ForceMode.Impulse);
+        //        anim.SetBool("YSpeed", true);
+        //    }
+        //    else
+        //    {
+        //        rb.AddForce(Vector3.down * Gravity, ForceMode.Impulse);
+        //        anim.SetBool("YSpeed", false);
+        //        //땅에없다
+        //    }
 
-        if (Input.GetButtonDown("Jump")) SpeedY = JumpPower;
-        else if (controller.isGrounded) SpeedY = 0;
-        else SpeedY += Gravity * Time.deltaTime;
+        //}
+
+        RaycastHit hit;
+        if (Input.GetButtonDown("Jump"))
+        {
+            SpeedY = JumpPower;
+            anim.SetBool("Jump", true);
+        }
+        else if (!Physics.Raycast(transform.position, Vector2.down, out hit, 1f, LayerMask.GetMask("Ground")))
+        {
+           SpeedY += Gravity * Time.deltaTime;
+            anim.SetBool("Jump", false);
+        }
 
         controller.Move(Vector3.up * SpeedY * Time.deltaTime);
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        if (AttackGizmo)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        Vector3 rightDir = AngleToDir(transform.eulerAngles.y + attackAngle * 0.5f);
-        Vector3 leftDir = AngleToDir(transform.eulerAngles.y - attackAngle * 0.5f);
-        Debug.DrawRay(transform.position, rightDir * attackRange, Color.blue);
-        Debug.DrawRay(transform.position, leftDir * attackRange, Color.blue);
+            Vector3 rightDir = AngleToDir(transform.eulerAngles.y + attackAngle * 0.5f);
+            Vector3 leftDir = AngleToDir(transform.eulerAngles.y - attackAngle * 0.5f);
+            Debug.DrawRay(transform.position, rightDir * attackRange, Color.blue);
+            Debug.DrawRay(transform.position, leftDir * attackRange, Color.blue);
+            Debug.DrawRay(transform.position, Vector2.down * 0.5f, Color.red);
+        }
+        if (interActionGizmo)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, interActionkRange);
 
+            Vector3 rightDir = AngleToDir(transform.eulerAngles.y + interActionAngle * 0.5f);
+            Vector3 leftDir = AngleToDir(transform.eulerAngles.y - interActionAngle * 0.5f);
+            Debug.DrawRay(transform.position, rightDir * interActionkRange, Color.blue);
+            Debug.DrawRay(transform.position, leftDir * interActionkRange, Color.blue);
+            Debug.DrawRay(transform.position, Vector2.down * 0.5f, Color.red);
+        }
     }
 
     private Vector3 AngleToDir(float angle)
@@ -262,9 +340,12 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Enemy")
-        { 
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        TakeHit(enemy.damage);
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            TakeHit(enemy.damage);
         }
+       
     }
+
+   
 }

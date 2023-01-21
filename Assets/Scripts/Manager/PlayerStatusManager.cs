@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.XPath;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -18,13 +21,27 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
     [SerializeField]
     private Image expBar;
 
+    [SerializeField]
+    private Image mpbar;
+
+    [SerializeField]
+    private Animator anim;
+
+    public PlayerController controller;
+
     // 경험치량 정하고 일정수치되면 경험치를 0으로 만들고 레벨업,경험치량 증가 파티클생성
     public UnityAction<float> hpAction;
     public UnityAction<int> levelAction;
     public UnityAction<float> expAction;
+    public UnityAction<float> mpAction;
 
     [SerializeField]
     public ParticleSystem particle;
+
+    [SerializeField]
+    private float maxMp;
+
+    private float curMp;
 
     [SerializeField]
     private float maxHp;
@@ -38,6 +55,12 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
     [SerializeField]
     private float maxExp;
     private float curexp;
+
+    public float MP
+    {
+        get { return curMp; }
+        private set { curMp = value; mpAction?.Invoke(curMp); }
+    }
 
     public float HP
     {
@@ -58,6 +81,7 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
     }
     private void Awake()
     {
+        curMp = maxMp;
         curexp = 0;
         curHp = maxHp;
     }
@@ -68,6 +92,10 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
             Levelup(); 
         }
 
+        if (curHp <= 0)
+            Die();
+
+        mpbar.fillAmount = curMp / maxMp;
         expBar.fillAmount = curexp / maxExp;    
         hpbar.fillAmount = curHp / maxHp;
     }
@@ -75,6 +103,12 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
     public void ExpUp(float exp)
     {
         Exp += exp;
+    }
+
+    public void Die()
+    {
+        controller.rtsMove = false;
+        anim.SetBool("Die",true);
     }
 
     public void Levelup()
@@ -95,7 +129,12 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
     public void TakeHit(float damage)
     {
         HP -= damage;
+        anim.SetTrigger("TakeHit");
     }
 
+    public void UseMp(float Mp)
+    {
+        MP -= Mp;
+    }
     
 }

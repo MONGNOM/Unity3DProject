@@ -17,6 +17,8 @@ TagManager:
   - RealSword
   - RangedAttack
   - RpgEnemy
+  - BossStatus
+  - RpgBoss
   layers:
   - Default
   - TransparentFX

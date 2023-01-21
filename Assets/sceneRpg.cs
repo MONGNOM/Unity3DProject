@@ -11,10 +11,13 @@ public class sceneRpg : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            LodingSceneController.LoadScene("OrcTestScene");
+            LodingSceneController.LoadScene("GameRPG_Town");
 
         }
-
+        else if (Input.GetKeyDown(KeyCode.F2))
+        {
+            LodingSceneController.LoadScene("MainGameRTS");
+        }
 
 
 

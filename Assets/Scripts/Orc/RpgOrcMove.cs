@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class RpgOrcMove : StateMachineBehaviour
 {
@@ -10,7 +11,9 @@ public class RpgOrcMove : StateMachineBehaviour
     private PlayerController controller;
 
     private RpgEnemy rpgEnemy;
-    
+
+ 
+
     [SerializeField]
     private float attackRange;
 

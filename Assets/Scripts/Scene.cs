@@ -4,10 +4,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Scene : SingleTon<Scene>
+public class Scene : MonoBehaviour
 {
- 
-private void OnTriggerExit(Collider other)
+    private void Start()
+    {
+        
+    }
+
+    private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {

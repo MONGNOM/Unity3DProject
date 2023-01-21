@@ -11716,18 +11716,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1796635450895110, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
   m_PrefabInstance: {fileID: 1472130046}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1472130049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472130048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29e5276a66e470e4b8b406d98cbea9fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1472130050
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11741,6 +11729,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4310408, y: 0.423879, z: 2.5046241}
   m_Center: {x: -0.025050005, y: -0.16042201, z: -0.12929508}
+--- !u!114 &1472130051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472130048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2abb53af5d3411641b772bc1132f0289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterScene: OrcCampScene
 --- !u!1001 &1500069761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16184,7 +16185,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1840157041260602, guid: 17d36ed57951c824fa6d4f4a785e96ce, type: 3}
   m_PrefabInstance: {fileID: 1962779826}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1962779828
+--- !u!4 &1962779829 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4823669919546516, guid: 17d36ed57951c824fa6d4f4a785e96ce, type: 3}
+  m_PrefabInstance: {fileID: 1962779826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1962779830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16193,14 +16199,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1962779827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00d26e9dce0efb648b4f64ec82e6c8fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 2abb53af5d3411641b772bc1132f0289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1962779829 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4823669919546516, guid: 17d36ed57951c824fa6d4f4a785e96ce, type: 3}
-  m_PrefabInstance: {fileID: 1962779826}
-  m_PrefabAsset: {fileID: 0}
+  enterScene: MainGameRTS
 --- !u!1001 &1964942915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16870,6 +16872,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3969556158925132238, guid: 8d29882b8fadcd8468de646534ff6774, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3969556158925132238, guid: 8d29882b8fadcd8468de646534ff6774, type: 3}
       propertyPath: m_Name
       value: PlayerStartPoint

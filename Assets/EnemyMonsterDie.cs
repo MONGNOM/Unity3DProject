@@ -29,8 +29,7 @@ public class EnemyMonsterDie : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log(monsterexp + "경험치를 얻습니다");
-        PlayerStatusManager.Instance.ExpUp(monsterexp);
-        // 경험치 시스템을 아군 몬스터로 여기서는 아군몬스터로 주고 나는 rpg에서 경험치 받자
+        //PlayerStatusManager.Instance.ExpUp(monsterexp); => 아군몬스터 경험치 시스템 만들어주자
         SpawnManager.Instance.GainMineral(Random.Range(1,50));
     }
 
