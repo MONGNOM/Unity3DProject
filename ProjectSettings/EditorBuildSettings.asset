@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OrcTestScene.unity
     guid: 2779a7e5da26d5946b78e15eff66c814
+  - enabled: 1
+    path: Assets/Scenes/StoreScene.unity
+    guid: a35aef021bf473a44af4cddc55ad5714
   m_configObjects: {}

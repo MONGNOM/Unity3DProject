@@ -20,7 +20,7 @@ public class BossStatusUi : SingleTon<BossStatusUi>
 
     private void Update()
     {
-        rpg = GameObject.FindGameObjectWithTag("RpgBoss").GetComponent<RpgEnemy>();
+        rpg = GameObject.FindGameObjectWithTag("RpgBoss").GetComponent<RpgEnemy>(); 
         if (rpg != null)
             unityEvent?.Invoke();
         else

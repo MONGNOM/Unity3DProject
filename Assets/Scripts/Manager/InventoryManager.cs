@@ -1,76 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryManager : SingleTon<InventoryManager>
 {
+    public UnityEvent inventoryUpdateUI;
+    
     [SerializeField]
-    private InventoryUI ui;
-    private EquipMentUi equip;
-
-    public List<InventoryItem> items = new List<InventoryItem>();
-
-
+    private InventoryUI inventoryUi;
+    
+    public List<InventoryItem> inventoryitems = new List<InventoryItem>();
     private void Start()
     {
-        ui = FindObjectOfType<InventoryUI>();
-        equip = FindObjectOfType<EquipMentUi>();
-        equip.gameObject.SetActive(false);
-        ui.gameObject.SetActive (false);
-        ui.UpdateUi ();
+        inventoryUi = FindObjectOfType<InventoryUI>();
+        inventoryUi.UpdateUi();
+        inventoryUi.gameObject.SetActive(false);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (ui.gameObject.activeSelf)
+            if (inventoryUi.gameObject.activeSelf)
             {
-                ui.gameObject.SetActive(false);
+                inventoryUi.gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
             }
             else
-            {
-                ui.gameObject.SetActive(true);
+            { 
+                inventoryUi.gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.U))
-        {
-            if (equip.gameObject.activeSelf)
-            {
-                equip.gameObject.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else
-            {
-                equip.gameObject.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-            }
-
-
         }
     }
-    public void AddItme(InventoryItem inventoryItem)
-    {
-        items.Add(inventoryItem);
-        ui.UpdateUi();
+
+    public void AddItem(InventoryItem inventoryitem)
+    { 
+        inventoryitems.Add(inventoryitem);
+        inventoryUi.UpdateUi();
+        //ㄴ 이걸로 바꿀예정 inventoryUpdateUI?.Invoke();
     }
 
     public void DropItem(InventoryItem inventoryItem)
     {
-        items.Remove(inventoryItem);
-        ui.UpdateUi();
-
         Instantiate(inventoryItem.data.prefab);
+        inventoryitems.Remove(inventoryItem);
+        inventoryUi.UpdateUi();
+        //ㄴ 이걸로 바꿀예정 inventoryUpdateUI?.Invoke();
     }
 
-    public void EquipItem(InventoryItem inventoryItem)
-    {
 
-        items.Remove(inventoryItem);
-        ui.UpdateUi();
-    
-        equip.UpdateEquip();
-    }
 }

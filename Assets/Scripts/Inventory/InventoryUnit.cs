@@ -5,28 +5,33 @@ using UnityEngine.UI;
 
 public class InventoryUnit : MonoBehaviour
 {
+    private InventoryItem inventoryItem;
+
     [SerializeField]
-    private Button usebutton;
+    private Button useButton;
     [SerializeField]
     private Image icon;
-    private InventoryItem inventory;
+
+    ItemData data;
+
 
     public void AddItem(InventoryItem inventoryItem)
     {
         icon.enabled = true;
-        usebutton.interactable = true;
-        inventory = inventoryItem;
+        useButton.interactable= true;
+        this.inventoryItem = inventoryItem;
         icon.sprite = inventoryItem.data.icon;
     }
 
     public void RemoveItem()
-    { 
-        usebutton.interactable = false;
+    {
         icon.enabled = false;
+        useButton.interactable = false;
     }
 
     public void UseItem()
     {
-        inventory.Use();
+        inventoryItem.Use();
     }
+
 }

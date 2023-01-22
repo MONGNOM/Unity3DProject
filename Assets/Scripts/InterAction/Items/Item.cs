@@ -6,12 +6,13 @@ public class Item : MonoBehaviour
 {
     [SerializeField]
     private ItemData data;
-    public void Get()
-    {
+
+    public void InventoryGet()
+    {  
         InventoryItem inventoryItem = new InventoryItem();
         inventoryItem.data = data;
+        InventoryManager.Instance.AddItem(inventoryItem);
 
-        InventoryManager.Instance.AddItme(inventoryItem);
         Destroy(gameObject);
     }
 }

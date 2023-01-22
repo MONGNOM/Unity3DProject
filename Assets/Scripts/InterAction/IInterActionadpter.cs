@@ -5,10 +5,10 @@ using UnityEngine.Events;
 
 public class IInterActionadpter : MonoBehaviour, IInteractable
 {
-
     public UnityEvent<PlayerController> OnInteraction;
+
     public void InterAction(PlayerController player)
     {
-        OnInteraction?.Invoke(player);
+        OnInteraction?.Invoke(player);  
     }   
 }
