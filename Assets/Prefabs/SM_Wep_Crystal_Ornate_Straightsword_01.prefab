@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3923416644769266481}
   - component: {fileID: 3923416644769266476}
   - component: {fileID: 3923416644769266486}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SM_Wep_Crystal_Ornate_Straightsword_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

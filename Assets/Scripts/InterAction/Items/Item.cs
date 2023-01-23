@@ -15,4 +15,11 @@ public class Item : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    public void EquipGet()
+    {
+        EquipItem equipItem = new EquipItem();
+        equipItem.data = data;
+        InventoryManager.Instance.EquipItem(equipItem);
+    }
 }

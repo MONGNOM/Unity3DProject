@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    private InventoryUnit[] inventoryUnits;
-
-   
+    public InventoryUnit[] inventoryUnits;
 
     public void UpdateUi()
     {
