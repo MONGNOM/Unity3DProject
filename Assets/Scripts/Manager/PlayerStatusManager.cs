@@ -28,6 +28,7 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
     private Animator anim;
 
     public PlayerController controller;
+    private StopButton stopButton;
 
     // 경험치량 정하고 일정수치되면 경험치를 0으로 만들고 레벨업,경험치량 증가 파티클생성
     public UnityAction<float> hpAction;
@@ -85,8 +86,18 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
         curexp = 0;
         curHp = maxHp;
     }
+    private void Start()
+    {
+        stopButton = FindObjectOfType<StopButton>();
+
+    }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        { 
+            Levelup();
+        }
+
         if (curexp == maxExp)
         { 
             Levelup(); 
@@ -109,6 +120,9 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
     {
         controller.rtsMove = false;
         anim.SetBool("Die",true);
+        Time.timeScale = 0;
+        stopButton.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Levelup()
@@ -121,9 +135,10 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
         Level += 1;
         maxExp += maxExp * 2;
         maxHp += maxHp * 2;
+        maxMp += maxMp * 2;
         curHp = maxHp;
         curexp = 0;
-        realSword.damage = realSword.damage * 1.3f;
+        realSword.damage = realSword.damage * 1.5f;
     }
 
     public void TakeHit(float damage)

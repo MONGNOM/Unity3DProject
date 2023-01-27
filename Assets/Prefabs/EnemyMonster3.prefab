@@ -816,9 +816,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5eb82edadbf724296b0fb0d1730f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 1000
+  maxhp: 500
   curhp: 0
-  damage: 100
+  damage: 20
   range: 20
   attackrange: 2
   fireRagte: 20

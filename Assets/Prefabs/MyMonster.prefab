@@ -2030,7 +2030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  maxhp: 1000
+  maxhp: 200
   curhp: 0
   mineral: 50
   icon: {fileID: 21300000, guid: a054c1c88fc11d94bb30680a572de873, type: 3}
@@ -2039,7 +2039,6 @@ MonoBehaviour:
   dieTime: 0
   unitMarker: {fileID: 2075283082425271775}
   move: {fileID: 0}
-  fireball: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   ground:
     serializedVersion: 2
@@ -2048,7 +2047,7 @@ MonoBehaviour:
   target: {fileID: 0}
   Takehit: 0
   unit: {fileID: 0}
-  damage: 100
+  damage: 200
   range: 20
   fireRagte: 20
   enemyTower: {fileID: 0}
@@ -2147,6 +2146,7 @@ MonoBehaviour:
   command: {fileID: 0}
   rangedAttack: {fileID: 0}
   playerview: {fileID: 0}
+  meleeAttack: {fileID: 0}
 --- !u!114 &6402841878565547676
 MonoBehaviour:
   m_ObjectHideFlags: 0

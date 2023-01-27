@@ -39,6 +39,8 @@ public class RpgEnemy : MonoBehaviour
     {
         if (curHp <= 0)
             Die();
+
+        anim.SetFloat("curHp", curHp);
     }
 
     public void OnAttackHit()

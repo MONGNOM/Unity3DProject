@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  maxhp: 150
+  maxhp: 500
   curhp: 0
   mineral: 10
   icon: {fileID: 21300000, guid: b48a946c769b2c14288115b88b7b7302, type: 3}
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   target: {fileID: 0}
   Takehit: 0
   unit: {fileID: 0}
-  damage: 30
+  damage: 20
   range: 20
   fireRagte: 1
   enemyTower: {fileID: 0}
