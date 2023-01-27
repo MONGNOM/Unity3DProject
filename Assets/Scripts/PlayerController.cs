@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -77,6 +76,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
         playerview = GetComponent<PlayerViewr>();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
@@ -219,6 +219,7 @@ public class PlayerController : MonoBehaviour
                 else if (colliders[i].gameObject.tag == "RpgBoss")
                 {
                     colliders[i].gameObject.GetComponent<RpgEnemy>().curHp -= realSword.damage;
+                    Debug.Log("¿ë¸ÂÀ½");
                     rpgEnemy.anim.SetTrigger("TakeHit");
                 }
             }

@@ -10,7 +10,7 @@ public class PlayerStartPoint : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        player.transform.position = gameObject.transform.position;
+        //player.transform.position = gameObject.transform.position;
     }
 
     private void Start()

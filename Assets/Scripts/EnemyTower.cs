@@ -22,12 +22,16 @@ public class EnemyTower : MonoBehaviour
     public MeleeAttackMonster meleeattack;
     public RangedAttackMonster rangedAttack;
 
-        
+    [SerializeField]
+    private Canvas victory;
+
+
+
     private void Start()
     {
         curhp = maxhp;
         //teamMonster = GameObject.FindGameObjectWithTag("TeamMonster").GetComponent<TeamMonster>();
-
+        victory.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -47,6 +51,8 @@ public class EnemyTower : MonoBehaviour
         { 
             Time.timeScale = 0; 
             Destroy(gameObject);
+            victory.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     private void TakeHit(int damage)

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class RpgBossHpDown : MonoBehaviour
 {
-    [SerializeField]
     private RpgEnemy monster;
 
     public Slider hpbar;

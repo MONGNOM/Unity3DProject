@@ -12,6 +12,8 @@ public class SkilButton : MonoBehaviour
     public BoxCollider iceAttackbox;
 
     public Weapon realsword;
+
+    public float damage;
     
 
     public Button button;
@@ -21,6 +23,7 @@ public class SkilButton : MonoBehaviour
     private void Start()
     {
         iceAttackbox.enabled = false;
+        damage = realsword.damage;
     }
 
     void Update()
@@ -34,6 +37,7 @@ public class SkilButton : MonoBehaviour
             animator.SetTrigger("Beam");
             StartCoroutine(BeamAttackPose());
             PlayerStatusManager.Instance.UseMp(150);
+            // 콜리전 된애들한테 데미지 ㄱ
         }
         else if (Input.GetKeyDown("2"))
         {
@@ -52,6 +56,7 @@ public class SkilButton : MonoBehaviour
             iceAttackbox.enabled = true;
             StartCoroutine(iceAttackCollider());
             PlayerStatusManager.Instance.UseMp(100);
+            //박스 닿은놈들에게 데밎 ㄱ
         }
         else
         {
