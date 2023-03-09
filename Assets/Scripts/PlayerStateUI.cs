@@ -19,13 +19,13 @@ public class PlayerStateUI : MonoBehaviour
 
     private void Update()
     {
-        levelValue = GameObject.Find("LevelValue").GetComponent<TextMeshProUGUI>();
-        MineralValue = GameObject.Find("MineralValue").GetComponent<TextMeshProUGUI>();
-        HeartlValue = GameObject.Find("HpValue").GetComponent<TextMeshProUGUI>();
+        //levelValue = GameObject.Find("LevelValue").GetComponent<TextMeshProUGUI>();
+        //MineralValue = GameObject.Find("MineralValue").GetComponent<TextMeshProUGUI>();
+        //HeartlValue = GameObject.Find("HpValue").GetComponent<TextMeshProUGUI>();
 
-        ChangeHeart(WaveManager.Instance.Heart);
-        ChangeMineral(SpawnManager.Instance.Mineral);
-        ChangeLevel(WaveManager.Instance.Level);
+        //ChangeHeart(WaveManager.Instance.Heart);
+        //ChangeMineral(SpawnManager.Instance.Mineral);
+        //ChangeLevel(WaveManager.Instance.Level);
     }
     private void Start()
     {

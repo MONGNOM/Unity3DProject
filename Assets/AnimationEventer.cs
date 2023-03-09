@@ -15,7 +15,6 @@ public class AnimationEventer : MonoBehaviour
     public void AttackHit()
     {
         onAttackHit?.Invoke();
-        particle.Play();
         Debug.Log("공격타이밍");
 }
     public void OnAttackStart()

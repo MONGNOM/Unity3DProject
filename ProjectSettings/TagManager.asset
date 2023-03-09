@@ -19,6 +19,11 @@ TagManager:
   - RpgEnemy
   - BossStatus
   - RpgBoss
+  - Dragon
+  - OrcBoss
+  - Boss
+  - thooth
+  - flame
   layers:
   - Default
   - TransparentFX

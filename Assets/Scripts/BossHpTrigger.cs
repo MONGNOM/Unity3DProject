@@ -15,12 +15,14 @@ public class BossHpTrigger : MonoBehaviour
     public Slider slider;
     private void Start()
     {
-        monster = GameObject.FindGameObjectWithTag("RpgBoss").GetComponent<RpgEnemy>();
     }
 
     public void BossHPbar()
     { 
-            slider.gameObject.SetActive(true);
+        monster = GameObject.FindGameObjectWithTag("RpgBoss").GetComponentInChildren<RpgEnemy>();
+        monster = GameObject.Find("RedDragon").GetComponentInChildren<RpgEnemy>();
+        //monster = GameObject.Find("RpgBoss (1)").GetComponent<RpgEnemy>();
+        slider.gameObject.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)

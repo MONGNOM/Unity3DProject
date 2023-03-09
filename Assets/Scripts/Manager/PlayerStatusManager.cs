@@ -12,23 +12,51 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public class PlayerStatusManager : SingleTon<PlayerStatusManager>
 {
+    [Header("레벨")]
     [SerializeField]
-    private Weapon realSword;
+    private int level;
 
+    [Header("공격력")]
     [SerializeField]
-    private Image hpbar;
+    private float damage;
 
+    [Header("체력")]
     [SerializeField]
-    private Image expBar;
+    private float maxHp;
+    private float curHp;
+
+
+
+    [Header("마나")]
+    [SerializeField]
+    private float maxMp;
+    private float curMp;
+    
+    [Header("경험치")]
+    [SerializeField]
+    private float maxExp;
+  
+    private float curexp;
+    
+
+    [Header("나머지")]
 
     [SerializeField]
     private Image mpbar;
 
     [SerializeField]
+    private Image hpbar;
+    [SerializeField]
+    private Image expBar;
+    
+    [SerializeField]
+    private Weapon realSword;
+
+    [SerializeField]
     private Animator anim;
 
     public PlayerController controller;
-    private StopButton stopButton;
+    public StopButton stopButton;
 
     // 경험치량 정하고 일정수치되면 경험치를 0으로 만들고 레벨업,경험치량 증가 파티클생성
     public UnityAction<float> hpAction;
@@ -38,24 +66,8 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
 
     [SerializeField]
     public ParticleSystem particle;
+    public swordwave sword;
 
-    [SerializeField]
-    private float maxMp;
-
-    private float curMp;
-
-    [SerializeField]
-    private float maxHp;
-
-    [SerializeField]
-    private float curHp;
-
-    [SerializeField]
-    private int level;
-
-    [SerializeField]
-    private float maxExp;
-    private float curexp;
 
     public float MP
     {
@@ -109,6 +121,7 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
         mpbar.fillAmount = curMp / maxMp;
         expBar.fillAmount = curexp / maxExp;    
         hpbar.fillAmount = curHp / maxHp;
+        realSword.damage = damage;
     }
 
     public void ExpUp(float exp)
@@ -137,6 +150,7 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
         maxHp += maxHp * 2;
         maxMp += maxMp * 2;
         curHp = maxHp;
+        curMp = maxMp;
         curexp = 0;
         realSword.damage = realSword.damage * 1.5f;
     }

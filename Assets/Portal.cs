@@ -7,6 +7,7 @@ public class Portal : MonoBehaviour
 {
     public string enterScene;
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

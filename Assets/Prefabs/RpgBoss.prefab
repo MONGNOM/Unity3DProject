@@ -937,8 +937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  bossName: Orc
-  particle: {fileID: 0}
+  bossName: "\uC624\uD06C\uC655"
   attackRange: 10
   damage: 100
   maxHp: 1000

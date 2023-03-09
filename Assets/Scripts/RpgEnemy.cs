@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class RpgEnemy : MonoBehaviour
 {
 
@@ -17,8 +16,7 @@ public class RpgEnemy : MonoBehaviour
     [SerializeField]
     private float attackRange;
 
-    [SerializeField]
-    private float damage;
+    public float damage;
 
 
     [SerializeField]
@@ -29,7 +27,7 @@ public class RpgEnemy : MonoBehaviour
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInParent<Animator>();
         curHp = maxHp;
     }
     private void Start()
@@ -40,7 +38,7 @@ public class RpgEnemy : MonoBehaviour
         if (curHp <= 0)
             Die();
 
-        anim.SetFloat("curHp", curHp);
+        anim.SetFloat("curHp", curHp); // 보스 체력을 읽어주는 것 같은데 뭐지
     }
 
     public void OnAttackHit()

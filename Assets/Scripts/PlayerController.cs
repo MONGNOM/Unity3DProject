@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 enum playerstate { Normal, Battle }
 [RequireComponent(typeof(CharacterController))]
@@ -72,11 +73,24 @@ public class PlayerController : MonoBehaviour
 
     public RpgEnemy rpgEnemy;
 
+    [SerializeField]
+    private GameObject damageText;
 
+    [SerializeField]
+    private Transform textTransform;
+
+    public bool hpDown;
+
+    public float hpdownTime;
+
+    public UnityEvent swordwave;
+    public GameObject sword;
+    public GameObject startSwordWave;
 
     private void Awake()
     {
-        gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
+        
+        //gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
         playerview = GetComponent<PlayerViewr>();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
@@ -86,7 +100,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
+        hpDown = true;
+        //gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
         weapon.HideSword();
         weaponhouse.HideSword();
         rtsMove = true;
@@ -152,7 +167,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeHit(int damage)
+    public void TakeHit(float damage)
     {
         PlayerStatusManager.Instance.TakeHit(damage);
     }
@@ -189,13 +204,11 @@ public class PlayerController : MonoBehaviour
         if (!Input.GetMouseButtonDown(0)) return;
 
         anim.SetTrigger("Attack");
-        
-
-
     }
 
     public void OnAttackHit()
     {
+        Instantiate(sword, startSwordWave.transform.position, startSwordWave.transform.rotation);
         // 1. 범위내에 있는가?
         Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
         for (int i = 0; i < colliders.Length; i++)
@@ -207,24 +220,44 @@ public class PlayerController : MonoBehaviour
             if (Vector3.Dot(transform.forward, dirToTarget) > Vector3.Dot(transform.forward, rightDir))
             {
                 if (colliders[i].gameObject.tag == "Enemy") // 나중에 데미저블 컴포넌트 가지고 있는 애들만 데미지 주는 걸로 구현
+                {
                     colliders[i].gameObject.GetComponent<Enemy>().curhp -= realSword.damage;
+                    //TakeDamage(realSword.damage);
+                    GameObject hudText = Instantiate(damageText, textTransform);
+                    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<Enemy>().transform.position);
+                }
                 else if (colliders[i].gameObject.tag == "EnemyTower")
+                {
                     colliders[i].gameObject.GetComponent<EnemyTower>().curhp -= realSword.damage;
+                    //TakeDamage(realSword.damage);
+                    GameObject hudText = Instantiate(damageText, textTransform);
+                    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<EnemyTower>().transform.position);
+                }
                 else if (colliders[i].gameObject.tag == "RpgEnemy")
                 {
                     colliders[i].gameObject.GetComponent<RpgEnemy>().curHp -= realSword.damage;
-                    rpgEnemy.anim.SetTrigger("TakeHit");
-                    Debug.Log("트리거들어옴");
+                    //rpgEnemy.anim.SetTrigger("TakeHit");
+                    GameObject hudText = Instantiate(damageText, textTransform);
+                    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().transform.position);
+                    //TakeDamage(realSword.damage);
                 }
                 else if (colliders[i].gameObject.tag == "RpgBoss")
                 {
-                    colliders[i].gameObject.GetComponent<RpgEnemy>().curHp -= realSword.damage;
-                    Debug.Log("용맞음");
+                    colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().curHp -= realSword.damage;
+                    GameObject hudText = Instantiate(damageText, textTransform);
+                    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().transform.position);
                     rpgEnemy.anim.SetTrigger("TakeHit");
                 }
             }
         }
 
+    }
+
+    public void TakeDamage(float damage)
+    {
+        GameObject hudText = Instantiate(damageText, textTransform);
+        hudText.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        //hudText.GetComponent<DamageText>().damage = damage;
     }
 
     public void OnAttackStart()
@@ -292,7 +325,7 @@ public class PlayerController : MonoBehaviour
         //}
 
         RaycastHit hit;
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && Physics.Raycast(transform.position, Vector2.down, out hit, 1f, LayerMask.GetMask("Ground")))
         {
             SpeedY = JumpPower;
             anim.SetBool("Jump", true);
@@ -344,9 +377,38 @@ public class PlayerController : MonoBehaviour
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             TakeHit(enemy.damage);
+
         }
-       
+
+    }
+    public IEnumerator NotHpDownTime()
+    {
+        yield return new WaitForSeconds(hpdownTime);
+        hpDown = true;
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!hpDown)
+            return;
+
+        else if (other.tag == "thooth")
+        {
+            hpDown = false;
+            StartCoroutine(NotHpDownTime());
+            Dragonthooth thooth = other.GetComponent<Dragonthooth>();
+            TakeHit(thooth.damage);
+            Debug.Log(string.Format("{0}범인찾기이빨", gameObject));
+        }
+        else if (other.tag == "flame")
+        {
+            hpDown = false;
+            StartCoroutine(NotHpDownTime());
+            DragonFire flame = other.GetComponent<DragonFire>();
+            TakeHit(flame.damage);
+            Debug.Log(string.Format("{0}범인찾기불", gameObject));
+        }
+    }
+
+
 }
