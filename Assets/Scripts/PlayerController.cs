@@ -86,14 +86,16 @@ public class PlayerController : MonoBehaviour
     public UnityEvent swordwave;
     public GameObject sword;
     public GameObject startSwordWave;
+    public GameObject endSwordWave;
 
+    public PoolGetter pool;
     private void Awake()
     {
-        
-        //gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
+        gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
         playerview = GetComponent<PlayerViewr>();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        pool = FindObjectOfType<PoolGetter>();
         //minimap = GameObject.Find("MiniMap_Cam").GetComponent<MiniMapController>();
         //canvas = GameObject.Find("StarCraftCanvus").GetComponent<Canvas>();
     }
@@ -208,7 +210,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackHit()
     {
-        Instantiate(sword, startSwordWave.transform.position, startSwordWave.transform.rotation);
+
         // 1. 범위내에 있는가?
         Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
         for (int i = 0; i < colliders.Length; i++)
@@ -251,12 +253,25 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (PlayerStatusManager.Instance.Level < 5)
+            return;
+
+        if (PlayerStatusManager.Instance.MP >= 0)
+        {
+            PlayerStatusManager.Instance.UseMp(100);
+            Vector3 rotation = startSwordWave.transform.rotation.eulerAngles;
+            rotation.z = weapon.transform.rotation.eulerAngles.z;
+            pool.NameGet("SwordWave");
+        }
+        else
+            return;
     }
 
     public void TakeDamage(float damage)
     {
+        rpgEnemy = GameObject.Find("RedDragon").GetComponentInChildren<RpgEnemy>();
         GameObject hudText = Instantiate(damageText, textTransform);
-        hudText.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        hudText.transform.position = Camera.main.WorldToScreenPoint(rpgEnemy.transform.position);
         //hudText.GetComponent<DamageText>().damage = damage;
     }
 

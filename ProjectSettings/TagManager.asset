@@ -24,6 +24,7 @@ TagManager:
   - Boss
   - thooth
   - flame
+  - SwordWave
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ public class SkilButton : MonoBehaviour
     public ParticleSystem powerUpparticle;
     public ParticleSystem iceAttackparticle;
     public BoxCollider iceAttackbox;
-
+    public GameObject sword;
     public Weapon realsword;
 
     public float damage;
@@ -56,8 +56,19 @@ public class SkilButton : MonoBehaviour
             iceAttackbox.enabled = true;
             StartCoroutine(iceAttackCollider());
             PlayerStatusManager.Instance.UseMp(100);
-            //¹Ú½º ´êÀº³ðµé¿¡°Ô µ¥“G ¤¡
         }
+        //else if (Input.GetKeyDown("`"))
+        //{ 
+        //    PlayerStatusManager.Instance.UseMp(100);
+        //    if (sword.gameObject.activeSelf)
+        //    {
+        //        sword.gameObject.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        sword.gameObject.SetActive(true);
+        //    }
+        //}
         else
         {
             animator.SetBool("PowerUp", false);

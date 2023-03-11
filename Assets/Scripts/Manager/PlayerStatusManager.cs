@@ -106,11 +106,13 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha4))
-        { 
-            Levelup();
+        {
+            if (level >= 5)
+                return;
+                    Levelup();
         }
 
-        if (curexp == maxExp)
+        if (curexp >= maxExp)
         { 
             Levelup(); 
         }
@@ -146,13 +148,13 @@ public class PlayerStatusManager : SingleTon<PlayerStatusManager>
         Debug.Log("경험치가 "+ Exp + "만큼 증가합니다" );
         Debug.Log("데미지가 "+ realSword.damage + "만큼 증가합니다" );
         Level += 1;
-        maxExp += maxExp * 2;
-        maxHp += maxHp * 2;
-        maxMp += maxMp * 2;
+        maxExp += maxExp * 1.5f;
+        maxHp += maxHp * 1.5f;
+        maxMp += maxMp * 1.5f;
         curHp = maxHp;
         curMp = maxMp;
         curexp = 0;
-        realSword.damage = realSword.damage * 1.5f;
+        damage += damage * 1.7f;
     }
 
     public void TakeHit(float damage)

@@ -9,27 +9,36 @@ public class swordwave : MonoBehaviour
     public float waveSpeed;
     public float damage;
     public PlayerController playerController;
+    public Weapon weapon;
+    public RpgEnemy rpgEnemy;
+    [SerializeField]
+    private GameObject damageText;
+
+    [SerializeField]
+    private Transform textTransform;
 
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
-        StartCoroutine(Swordwave());
-
+        weapon = FindObjectOfType<Weapon>();
+        rpgEnemy = GameObject.Find("RedDragon").GetComponentInChildren<RpgEnemy>();
+        damage = weapon.damage;
     }
-    public IEnumerator Swordwave()
-    {
-        yield return new WaitForSeconds(wavedelete);
-
-        Destroy(gameObject);
-        Debug.Log(string.Format("{0}이 사라짐", gameObject.name));
-    }
-
+  
   
     private void Update()
     {
-        Vector3 forward = playerController.transform.forward;
-        transform.Translate(forward * waveSpeed * Time.deltaTime, Space.World);
-        
+        transform.Translate(Vector3.forward * waveSpeed * Time.deltaTime, Space.Self);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "RpgBoss")
+        {
+            Debug.Log("검기데미지들어옴");
+            rpgEnemy.curHp -= damage;
+            playerController.TakeDamage(damage);
+            
+        }
+    }
 }

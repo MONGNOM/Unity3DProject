@@ -14,7 +14,7 @@ public class RpgEnemy : MonoBehaviour
 
 
     [SerializeField]
-    private float attackRange;
+    private float attackRange;  
 
     public float damage;
 
@@ -65,5 +65,14 @@ public class RpgEnemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(gameObject.transform.position, attackRange);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "SwordWave")
+        {
+            Debug.Log("검기데미지들어옴");
+            swordwave sword = other.GetComponent<swordwave>();
+            curHp -= sword.damage;
+        }
     }
 }
