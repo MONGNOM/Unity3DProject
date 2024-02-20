@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
 
     [Header("Spec")]
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
 
  
 
-    private void TakeHit(int damage)
+    private void TakeHit(float damage)
     {
         curhp -= damage;
     }
@@ -99,5 +99,10 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(gameObject.transform.position,attackrange);
 
+    }
+
+    public void TakeHitDamage(float damage)
+    {
+        curhp -= damage;
     }
 }

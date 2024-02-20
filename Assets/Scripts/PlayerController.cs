@@ -210,7 +210,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackHit()
     {
-
         // 1. 범위내에 있는가?
         Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
         for (int i = 0; i < colliders.Length; i++)
@@ -221,20 +220,21 @@ public class PlayerController : MonoBehaviour
             // 2. 각도내에 있는가?
             if (Vector3.Dot(transform.forward, dirToTarget) > Vector3.Dot(transform.forward, rightDir))
             {
-                if (colliders[i].gameObject.tag == "Enemy") // 나중에 데미저블 컴포넌트 가지고 있는 애들만 데미지 주는 걸로 구현
+                if (colliders[i].gameObject.GetComponent<IDamageable>() != null) // 나중에 데미저블 컴포넌트 가지고 있는 애들만 데미지 주는 걸로 구현 --> 데미지 없으면 다음거 없으면 다음걸로 코드량 줄이고 수정 
                 {
-                    colliders[i].gameObject.GetComponent<Enemy>().curhp -= realSword.damage;
+                    colliders[i].gameObject.GetComponent<EnemyTower>().TakeHitDamage(realSword.Damage);
+                    colliders[i].gameObject.GetComponent<Enemy>().TakeHitDamage(realSword.Damage);
                     //TakeDamage(realSword.damage);
                     GameObject hudText = Instantiate(damageText, textTransform);
                     hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<Enemy>().transform.position);
                 }
-                else if (colliders[i].gameObject.tag == "EnemyTower")
-                {
-                    colliders[i].gameObject.GetComponent<EnemyTower>().curhp -= realSword.damage;
-                    //TakeDamage(realSword.damage);
-                    GameObject hudText = Instantiate(damageText, textTransform);
-                    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<EnemyTower>().transform.position);
-                }
+                //else if (colliders[i].gameObject.tag == "EnemyTower")
+                //{
+                //    colliders[i].gameObject.GetComponent<EnemyTower>().curhp -= realSword.damage;
+                //    //TakeDamage(realSword.damage);
+                //    GameObject hudText = Instantiate(damageText, textTransform);
+                //    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<EnemyTower>().transform.position);
+                //}
                 else if (colliders[i].gameObject.tag == "RpgEnemy")
                 {
                     colliders[i].gameObject.GetComponent<RpgEnemy>().curHp -= realSword.damage;

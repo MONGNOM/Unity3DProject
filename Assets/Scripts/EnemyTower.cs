@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyTower : MonoBehaviour
+public class EnemyTower : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private float maxhp;
@@ -76,5 +76,8 @@ public class EnemyTower : MonoBehaviour
 
         }
     }
-
+    public void TakeHitDamage(float damage)
+    {
+        curhp -= damage;
+    }
 }
