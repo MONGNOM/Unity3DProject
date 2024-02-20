@@ -13,7 +13,6 @@ public class PoolGetter : MonoBehaviour
     }
     public void NameGet(string get)
     {
-        Debug.Log("222");
         Key = get;
         pool.NameGet(Key);
     }
@@ -21,9 +20,7 @@ public class PoolGetter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            Debug.Log("333");
             pool.NameGet("SwordWave");
-            
         }
     }
 }
