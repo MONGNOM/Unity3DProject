@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 9260
+  controlID: 1192
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 9261
+  controlID: 1169
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 9262
+  controlID: 1170
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 9225
+  controlID: 1138
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -720,10 +720,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 1ee3fcff
-      m_LastClickedID: -204002
-      m_ExpandedIDs: 8c82fcff5283fcffa859feffe477feff16fbffffecf302001af4020082f40200
+      scrollPos: {x: 0, y: 120}
+      m_SelectedIDs: 5066feff
+      m_LastClickedID: -104880
+      m_ExpandedIDs: dadcffff16fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -766,15 +766,15 @@ MonoBehaviour:
     y: 0
     width: 1225
     height: 336
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 14}
+  m_MinSize: {x: 232, y: 271}
+  m_MaxSize: {x: 10002, y: 10021}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
   - {fileID: 14}
   - {fileID: 15}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -816,22 +816,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 58
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets
   m_LastFoldersGridSize: 58
   m_LastProjectPath: C:\Users\wjdah\source\repos\Unity3DProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 377}
-    m_SelectedIDs: 8e4f0100
-    m_LastClickedID: 85902
-    m_ExpandedIDs: 00000000124f0100144f0100164f0100184f01001a4f01001c4f01001e4f0100204f010000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: e4210200
+    m_LastClickedID: 139748
+    m_ExpandedIDs: 0000000090210200922102009421020096210200982102009a2102009c2102009e21020000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -859,7 +859,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000124f0100144f0100164f0100184f01001a4f01001c4f01001e4f0100204f010000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000090210200922102009421020096210200982102009a2102009c2102009e21020000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -884,8 +884,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 8455feff
-    m_LastClickedInstanceID: -109180
+    m_SelectedInstanceIDs: 5066feff
+    m_LastClickedInstanceID: -104880
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300009eb00000208e1500e484150014d10200548b1b00a88b1b00b6b50000e0eb53007a573e007c573e00f6440100764801007082170020580b008c251e0080251e00ce251e00b0251e00d4251e0086251e005c203400564201007a420100c441010050420100b8410100344101008230640072301f0078301f00c46b21007a410100de410100e2410100401e3300e2ca780078410100a64201002e4401003c51010072690d00f8660d003c480100786e0d0068a39c000000000068a49c0064a49c0084df20007edf2000f2655c00b0441f00129a570054eda7005eeda7003ad85200fe75de00d269e500ae69e500ba69e500be69e50058bf0000ee69e5008669e50078900100feb60000809001006c900100e26e8100fc7281001c876a009867c6003037eb002a37eb001cbcfa00fef615010ef81501fac100004ad11100fef31100
     m_RenameOverlay:
@@ -973,7 +973,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -204002
+  m_LastSelectedObjectID: -104880
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52

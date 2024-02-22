@@ -222,36 +222,36 @@ public class PlayerController : MonoBehaviour
             {
                 if (colliders[i].gameObject.GetComponent<IDamageable>() != null) // 나중에 데미저블 컴포넌트 가지고 있는 애들만 데미지 주는 걸로 구현 --> 데미지 없으면 다음거 없으면 다음걸로 코드량 줄이고 수정 
                 {
-                    colliders[i].gameObject.GetComponent<EnemyTower>().TakeHitDamage(realSword.Damage);
-                    colliders[i].gameObject.GetComponent<Enemy>().TakeHitDamage(realSword.Damage);
-                    //TakeDamage(realSword.damage);
-                    GameObject hudText = Instantiate(damageText, textTransform);
-                    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<Enemy>().transform.position);
-                }
-                //else if (colliders[i].gameObject.tag == "EnemyTower")
-                //{
-                //    colliders[i].gameObject.GetComponent<EnemyTower>().curhp -= realSword.damage;
-                //    //TakeDamage(realSword.damage);
-                //    GameObject hudText = Instantiate(damageText, textTransform);
-                //    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<EnemyTower>().transform.position);
-                //}
-                else if (colliders[i].gameObject.tag == "RpgEnemy")
-                {
-                    colliders[i].gameObject.GetComponent<RpgEnemy>().curHp -= realSword.damage;
-                    //rpgEnemy.anim.SetTrigger("TakeHit");
-                    GameObject hudText = Instantiate(damageText, textTransform);
-                    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().transform.position);
-                    //TakeDamage(realSword.damage);
-                }
-                else if (colliders[i].gameObject.tag == "RpgBoss")
-                {
-                    colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().curHp -= realSword.damage;
-                    GameObject hudText = Instantiate(damageText, textTransform);
-                    hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().transform.position);
-                    rpgEnemy.anim.SetTrigger("TakeHit");
+                    if (colliders[i].gameObject.GetComponent<EnemyTower>())
+                    {
+                        colliders[i].gameObject.GetComponent<EnemyTower>().TakeHitDamage(realSword.Damage);
+                        GameObject hudText = Instantiate(damageText, textTransform);
+                        hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<EnemyTower>().transform.position);
+                    }
+                    else if (colliders[i].gameObject.GetComponent<Enemy>())
+                    {
+                        colliders[i].gameObject.GetComponent<Enemy>().TakeHitDamage(realSword.Damage);
+                        GameObject hudText = Instantiate(damageText, textTransform);
+                        hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponent<Enemy>().transform.position);
+                    }
+                    else if (colliders[i].gameObject.GetComponent<RpgEnemy>())
+                    {
+                        colliders[i].gameObject.GetComponent<RpgEnemy>().TakeHitDamage(realSword.Damage);
+                        GameObject hudText = Instantiate(damageText, textTransform);
+                        hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().transform.position);
+                    }
+                    else
+                    {
+                        colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().TakeHitDamage(realSword.Damage);
+                        GameObject hudText = Instantiate(damageText, textTransform);
+                        hudText.transform.position = Camera.main.WorldToScreenPoint(colliders[i].gameObject.GetComponentInChildren<RpgEnemy>().transform.position);
+                        rpgEnemy.anim.SetTrigger("TakeHit");
+                    }
+                    
                 }
             }
         }
+
 
         if (PlayerStatusManager.Instance.Level < 5)
             return;
@@ -266,6 +266,7 @@ public class PlayerController : MonoBehaviour
         else
             return;
     }
+
 
     public void TakeDamage(float damage)
     {

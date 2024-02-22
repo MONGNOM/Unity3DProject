@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RpgEnemy : MonoBehaviour
+public class RpgEnemy : MonoBehaviour,IDamageable
 {
 
     public NavMeshAgent agent;
@@ -74,5 +74,10 @@ public class RpgEnemy : MonoBehaviour
             swordwave sword = other.GetComponent<swordwave>();
             curHp -= sword.damage;
         }
+    }
+
+    public void TakeHitDamage(float damage)
+    {
+        curHp -= damage;
     }
 }

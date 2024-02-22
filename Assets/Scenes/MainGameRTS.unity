@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -2837,6 +2837,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 649418833986754558, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
   m_PrefabInstance: {fileID: 649418834601056869}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1174785116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 649418833986754547, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
+  m_PrefabInstance: {fileID: 649418834601056869}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b02c842fe540984c9e12cadb6e3daf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1190010774
 GameObject:
   m_ObjectHideFlags: 0
@@ -4447,11 +4458,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649418833860872015, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00013487594
+      value: 0.0001348926
       objectReference: {fileID: 0}
     - target: {fileID: 649418833860872015, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000034729735
+      value: 0.000034734025
       objectReference: {fileID: 0}
     - target: {fileID: 649418833860872015, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4505,6 +4516,26 @@ PrefabInstance:
       propertyPath: swordwave.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 649418833986754555, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
+      propertyPath: onAttackHit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649418833986754555, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
+      propertyPath: onAttackHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1174785116}
+    - target: {fileID: 649418833986754555, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
+      propertyPath: onAttackHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnAttackHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 649418833986754555, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
+      propertyPath: onAttackHit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 649418833986754555, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
+      propertyPath: onAttackHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 649418833996805176, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4530,8 +4561,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 649418834101570800, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
+      propertyPath: heart
+      value: 1000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 649418834101570800, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: spawnDelay
-      value: 10000
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 649418834101570813, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: damage
@@ -4827,11 +4862,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649418834754338549, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00013486759
+      value: 0.00013490091
       objectReference: {fileID: 0}
     - target: {fileID: 649418834754338549, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000034727593
+      value: 0.000034736175
       objectReference: {fileID: 0}
     - target: {fileID: 649418834754338549, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4923,11 +4958,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649418834856819491, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00013547543
+      value: 0.00013550892
       objectReference: {fileID: 0}
     - target: {fileID: 649418834856819491, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00003227518
+      value: 0.000032283155
       objectReference: {fileID: 0}
     - target: {fileID: 649418834856819491, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4935,7 +4970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649418834856819491, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.23175049
+      value: 0.2317505
       objectReference: {fileID: 0}
     - target: {fileID: 649418834875803861, guid: 014f2b3395ba2074b928748c66441a89, type: 3}
       propertyPath: m_AnchorMax.y
