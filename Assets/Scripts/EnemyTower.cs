@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyTower : MonoBehaviour, IDamageable
+public class EnemyTower : MonoBehaviour
 {
     [SerializeField]
     private float maxhp;

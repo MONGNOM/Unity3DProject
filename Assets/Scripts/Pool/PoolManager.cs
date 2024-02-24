@@ -28,12 +28,13 @@ public class PoolManager : MonoBehaviour
                 instance.SetActive(false);
                 instance.gameObject.name = poolprefab[i].prefab.name;
                 instance.transform.parent = poolprefab[i].Container;
+                stack.Push(instance);
             }
             poolDic.Add(poolprefab[i].prefab.name, stack);
         }
     }
 
-    public GameObject NameGet(string name)
+    public GameObject NameGet(string name,Vector3 pos)
     {
         Stack<GameObject> stack = poolDic[name];
         if (stack.Count > 0)
@@ -42,6 +43,7 @@ public class PoolManager : MonoBehaviour
             GameObject instance = stack.Pop();
             instance.gameObject.SetActive(true);
             instance.transform.parent = null;
+            instance.transform.position = pos;
             return instance;
         }
         else 

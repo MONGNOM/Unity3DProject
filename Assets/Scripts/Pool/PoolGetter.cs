@@ -11,16 +11,19 @@ public class PoolGetter : MonoBehaviour
     {
         pool = FindObjectOfType<PoolManager>();
     }
-    public void NameGet(string get)
+    public void NameGet(string get, Vector3 pos)
     {
+        Debug.Log("222");
         Key = get;
-        pool.NameGet(Key);
+        pool.NameGet(Key,pos);
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            pool.NameGet("SwordWave");
+            Debug.Log("333");
+            pool.NameGet("SwordWave",transform.position);
+            
         }
     }
 }

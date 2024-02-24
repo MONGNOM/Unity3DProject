@@ -20,6 +20,7 @@ public class RpgOrcMove : StateMachineBehaviour
     private void Awake()
     {
     }
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rpgEnemy = animator.GetComponentInChildren<RpgEnemy>();
@@ -31,7 +32,6 @@ public class RpgOrcMove : StateMachineBehaviour
         rpgEnemy.agent = animator.GetComponentInChildren<NavMeshAgent>();
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         rpgEnemy.agent.destination = controller.transform.position;
-        Debug.Log("오크가 플레이어 위치로 이동함");
 
         Collider[] colliders = Physics.OverlapSphere(animator.gameObject.transform.position, attackRange);
         for (int i = 0; i < colliders.Length; i++)
@@ -41,7 +41,6 @@ public class RpgOrcMove : StateMachineBehaviour
             {
                 animator.SetBool("Move", false);
                 animator.SetTrigger("Attack");
-                Debug.Log("찾았는데");
                 break;
 
             }
