@@ -8,7 +8,6 @@ public class OpenDungeonOrc : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("오크마을로 갑니다.");
             LodingSceneController.LoadScene("OrcCampScene");
         }
     }

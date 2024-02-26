@@ -19,7 +19,6 @@ public class FlameTrigger : MonoBehaviour
         if (tag == "Player")
         {
             // 플레이어 피깎기
-            Debug.Log("피깍임");
         }
     }
 

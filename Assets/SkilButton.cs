@@ -31,7 +31,6 @@ public class SkilButton : MonoBehaviour
         // 플레이어 컨트롤러로 이동 예정
         if (Input.GetKeyDown("1"))
         {
-            Debug.Log("스킬씀");
             beamparticle.Play();
             animator.SetBool("BeamSkil", true);
             animator.SetTrigger("Beam");
@@ -41,7 +40,6 @@ public class SkilButton : MonoBehaviour
         }
         else if (Input.GetKeyDown("2"))
         {
-            Debug.Log("스킬씀");
             powerUpparticle.Play();
             animator.SetBool("PowerUp", true);
             realsword.damage = realsword.damage * 2;
@@ -50,7 +48,6 @@ public class SkilButton : MonoBehaviour
         }
         else if (Input.GetKeyDown("3"))
         {
-            Debug.Log("스킬씀");
             iceAttackparticle.Play();
             animator.SetTrigger("IceAttack");
             iceAttackbox.enabled = true;
@@ -89,7 +86,6 @@ public class SkilButton : MonoBehaviour
 
     public IEnumerator PowerUpExit()
     {
-        Debug.Log("버프 5초 남음");
         yield return new WaitForSeconds(5f);
         realsword.damage /= 2;
     }

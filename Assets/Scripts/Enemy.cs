@@ -21,8 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private float attackrange;
     [SerializeField]
     private float fireRagte;
-    //[SerializeField]
-    //private int mineral;
+
 
     public Animator anim;
     [SerializeField]
@@ -85,7 +84,6 @@ public class Enemy : MonoBehaviour, IDamageable
         }
         else if (collision.collider.tag == "TeamMonster")
         {
-            Debug.Log("근접공격한테 맞았다");
             MeleeAttackMonster attack = collision.gameObject.GetComponent<MeleeAttackMonster>();
             TakeHit(attack.damage);
 

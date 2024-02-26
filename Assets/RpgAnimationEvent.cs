@@ -11,7 +11,6 @@ public class RpgAnimationEvent : MonoBehaviour
     public void OnAttackHit()
     { 
         OnAttack?.Invoke();
-        Debug.Log("Rpg적 공격 타이밍");
     
     }
 

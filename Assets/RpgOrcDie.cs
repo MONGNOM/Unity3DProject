@@ -37,12 +37,9 @@ public class RpgOrcDie : StateMachineBehaviour
         {
             Destroy(animator.gameObject);
             PlayerStatusManager.Instance.ExpUp(monsterexp);
-            Debug.Log(monsterexp + "경험치를 얻습니다");
             SpawnManager.Instance.GainMineral(Random.Range(undermineral,overmineral));
-            Debug.Log(monsterexp + "금화를 얻습니다.");
         }
         
-        Debug.Log("집가는 문");
         ParticleSystem particle = GameObject.Find("GoHome").GetComponent<ParticleSystem>();
         BoxCollider box = GameObject.Find("GoHome").GetComponent<BoxCollider>();
         particle.Play();

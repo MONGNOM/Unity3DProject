@@ -96,20 +96,17 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         pool = FindObjectOfType<PoolGetter>();
-        //minimap = GameObject.Find("MiniMap_Cam").GetComponent<MiniMapController>();
-        //canvas = GameObject.Find("StarCraftCanvus").GetComponent<Canvas>();
+        
     }
 
     private void Start()
     {
         hpDown = true;
-        //gameObject.transform.position = new Vector3(28.39f, 5.06f, -57f);
         weapon.HideSword();
         weaponhouse.HideSword();
         rtsMove = true;
         playermove = true;
         state = playerstate.Normal;
-        //rpgEnemy = GameObject.FindGameObjectWithTag("RpgEnemy").GetComponent<RpgEnemy>();
     }
     private void Update()
     {
@@ -261,7 +258,7 @@ public class PlayerController : MonoBehaviour
             PlayerStatusManager.Instance.UseMp(100);
             Vector3 rotation = startSwordWave.transform.rotation.eulerAngles;
             rotation.z = weapon.transform.rotation.eulerAngles.z;
-            pool.NameGet("SwordWave");
+            pool.NameGet("SwordWave",gameObject.transform.position);
         }
         else
             return;
@@ -273,7 +270,7 @@ public class PlayerController : MonoBehaviour
         rpgEnemy = GameObject.Find("RedDragon").GetComponentInChildren<RpgEnemy>();
         GameObject hudText = Instantiate(damageText, textTransform);
         hudText.transform.position = Camera.main.WorldToScreenPoint(rpgEnemy.transform.position);
-        //hudText.GetComponent<DamageText>().damage = damage;
+       
     }
 
     public void OnAttackStart()

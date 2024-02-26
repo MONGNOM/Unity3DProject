@@ -19,7 +19,6 @@ public class GoHomePortal : MonoBehaviour
         if (other.tag == "Player")
         {
             playerController.transform.position = rpgTown.position;
-            Debug.Log("Rpg 맵으로 이동합니다");
          
         }
     }

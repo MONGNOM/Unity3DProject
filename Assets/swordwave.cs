@@ -42,7 +42,6 @@ public class swordwave : MonoBehaviour
     {
         if (other.gameObject.tag == "RpgBoss")
         {
-            Debug.Log("검기데미지들어옴");
             rpgEnemy.curHp -= damage;
             playerController.TakeDamage(damage);
 
