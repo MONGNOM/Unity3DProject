@@ -20,15 +20,16 @@ public class RpgOrcIdle : StateMachineBehaviour
         Collider[] colliders = Physics.OverlapSphere(animator.gameObject.transform.position, findRange);
         for (int i = 0; i < colliders.Length; i++)
         {
-            controller = colliders[i].GetComponent<PlayerController>(); 
+            controller = colliders[i].GetComponent<PlayerController>();
             if (null != controller)
             {
-                animator.SetBool("Move",true);
+                animator.SetBool("Move", true);
                 Debug.Log("오크가 플레이어를 찾음");
-                Debug.Log("여기가범인22");
                 break;
-                // 여기가 Idle 코드창
             }
+            else
+                animator.SetBool("Move", false);
+
         }
     }
 

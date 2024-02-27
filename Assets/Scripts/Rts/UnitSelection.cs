@@ -13,9 +13,6 @@ public class UnitSelection : MonoBehaviour
 
     public static UnitSelection Instance { get { return instance; }}
 
-
-
-    
     private void Awake()
     {
         if (instance != null && instance != this)

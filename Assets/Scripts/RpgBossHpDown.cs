@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class RpgBossHpDown : MonoBehaviour
 {
-    [SerializeField]
     private RpgEnemy monster;
 
     public Slider hpbar;
@@ -22,11 +21,14 @@ public class RpgBossHpDown : MonoBehaviour
     }
     private void HpDown()
     {
-        monster = GameObject.FindGameObjectWithTag("RpgBoss").GetComponent<RpgEnemy>();
+        monster = GameObject.FindWithTag("RpgBoss").GetComponentInChildren<RpgEnemy>();
         hpbar.maxValue = monster.maxHp;
         hpbar.value = monster.curHp;
         if (monster.curHp <= 0)
+        {
+            hpbar.maxValue = 0;
             gameObject.SetActive(false);
+        }
 
     }
 

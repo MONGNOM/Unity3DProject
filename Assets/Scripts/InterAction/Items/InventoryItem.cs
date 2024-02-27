@@ -12,7 +12,7 @@ public class InventoryItem // 이걸 상속받아서 use를 오버라이드해서 드랍아이템이�
 
     public virtual void Equip(InventoryItem inventoryItem)
     {
-        if (data.type != ItemData.ItemType.equip)
+        if (data.itemtype != ItemData.ItemType.equip)
             return;
 
         InventoryManager.Instance.EquipItem(inventoryItem);
@@ -20,13 +20,13 @@ public class InventoryItem // 이걸 상속받아서 use를 오버라이드해서 드랍아이템이�
     }
     public virtual void Use(InventoryItem inventoryItem)
     {
-        if (data.type != ItemData.ItemType.potion)
+        if (data.itemtype != ItemData.ItemType.potion)
             return;
     }
 
     public virtual void UnEquip(InventoryItem inventoryItem)
     {
-        if (data.type != ItemData.ItemType.equip || data == null)
+        if (data.itemtype != ItemData.ItemType.equip || data == null)
             return;
 
         InventoryManager.Instance.UnEquipItem(inventoryItem);

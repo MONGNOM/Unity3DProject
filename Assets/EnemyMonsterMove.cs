@@ -41,7 +41,6 @@ public class EnemyMonsterMove : StateMachineBehaviour
             if (null != target)
             {
                 animator.SetTrigger("Attack");
-                Debug.Log("팀몬스터가 공격범위안에 들어옴.");
                 enemy.transform.LookAt(target.transform.position);
                 enemy.agent.destination = target.transform.position;
                 break;
@@ -49,14 +48,12 @@ public class EnemyMonsterMove : StateMachineBehaviour
             else if (null != playerController)
             {
                 animator.SetTrigger("Attack");
-                Debug.Log("팀플레이어가 공격범위안에 들어옴");
                 enemy.transform.LookAt(playerController.transform.position);
                 enemy.agent.destination = playerController.transform.position;
                 break;
             }
             else
             {
-                Debug.Log("타워공격범위안에 들어옴");
                 myTower = GameObject.FindGameObjectWithTag("MyTower").GetComponent<MyTower>();
                 enemy.agent.destination = myTower.transform.position;
                 enemy.transform.LookAt(myTower.transform.position);

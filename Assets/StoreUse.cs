@@ -11,7 +11,7 @@ public class StoreUse : MonoBehaviour
 
     public void storeuse()
     {
-        //InventoryManager.Instance.StoreOpen();
+        InventoryManager.Instance.StoreOpen(); 
     }
 
 }

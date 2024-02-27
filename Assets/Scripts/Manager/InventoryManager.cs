@@ -21,21 +21,43 @@ public class InventoryManager : SingleTon<InventoryManager>
 
     public PlayerController playerController;
 
+    [SerializeField]
+    private StopButton stopButton;
 
+    private StoreUi store;
 
     private void Start()
     {
+        store = FindObjectOfType<StoreUi>();
+        stopButton = FindObjectOfType<StopButton>();
         playerController = FindObjectOfType<PlayerController>();
         inventoryUi = FindObjectOfType<InventoryUI>();
         equipMentUi = FindObjectOfType<EquipMentUi>();
         inventoryUi.gameObject.SetActive(false);
+        stopButton.gameObject.SetActive(false);
         equipMentUi.gameObject.SetActive(false);
+        store.gameObject.SetActive(false);
         inventoryUi.UpdateUi();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            if (stopButton.gameObject.activeSelf)
+            {
+                stopButton.gameObject.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1;
+            }
+            else
+            {
+                stopButton.gameObject.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.U))
         {
             if (equipMentUi.gameObject.activeSelf)
             {
@@ -71,6 +93,23 @@ public class InventoryManager : SingleTon<InventoryManager>
         //ㄴ 이걸로 바꿀예정 inventoryUpdateUI?.Invoke();
     }
 
+    public void StoreOpen()
+    {
+        if (store.gameObject.activeSelf)
+        {
+            store.gameObject.SetActive(false);
+            inventoryUi.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            inventoryUi.gameObject.SetActive(true);
+            store.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+    }
+
     public void RemoveItem(InventoryItem inventoryItem)
     {
         inventoryitems.Remove(inventoryItem);
@@ -89,14 +128,14 @@ public class InventoryManager : SingleTon<InventoryManager>
     {
         Debug.Log(inventoryItem);
         equipItems.Add(inventoryItem);
-        equipMentUi.UpdateUi();
+        equipMentUi.WeaponUpdateUi();
         Debug.Log(equipItems[0].data.name);
     }
 
     public void UnEquipItem(InventoryItem inventoryItem)
     {
         equipItems.Remove(inventoryItem);
-        equipMentUi.UpdateUi();
+        equipMentUi.WeaponUpdateUi();
     }
 
 

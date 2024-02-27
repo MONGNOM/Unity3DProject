@@ -13,22 +13,29 @@ public class BossStatusUi : SingleTon<BossStatusUi>
     public RpgEnemy rpg;
 
     public UnityEvent unityEvent;
-   
+
     public void Start()
     {
     }
 
     private void Update()
     {
-        rpg = GameObject.FindGameObjectWithTag("RpgBoss").GetComponent<RpgEnemy>(); 
+        rpg = GameObject.FindWithTag("RpgBoss").GetComponentInChildren<RpgEnemy>();
         if (rpg != null)
-            unityEvent?.Invoke();
+            BossName.text = rpg.bossName;
         else
             return;
     }
 
     public void ChangeBossName()
     {
-        BossName.text = rpg.ToString();
+        if (rpg != null)
+        {
+            BossName.text = rpg.bossName;
+        }
+        else
+        { 
+            BossName.text = null;
+        }
     }
 }

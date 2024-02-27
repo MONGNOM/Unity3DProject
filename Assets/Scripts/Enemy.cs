@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
 
     [Header("Spec")]
@@ -21,8 +21,7 @@ public class Enemy : MonoBehaviour
     private float attackrange;
     [SerializeField]
     private float fireRagte;
-    //[SerializeField]
-    //private int mineral;
+
 
     public Animator anim;
     [SerializeField]
@@ -68,7 +67,7 @@ public class Enemy : MonoBehaviour
 
  
 
-    private void TakeHit(int damage)
+    private void TakeHit(float damage)
     {
         curhp -= damage;
     }
@@ -85,7 +84,6 @@ public class Enemy : MonoBehaviour
         }
         else if (collision.collider.tag == "TeamMonster")
         {
-            Debug.Log("근접공격한테 맞았다");
             MeleeAttackMonster attack = collision.gameObject.GetComponent<MeleeAttackMonster>();
             TakeHit(attack.damage);
 
@@ -99,5 +97,10 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(gameObject.transform.position,attackrange);
 
+    }
+
+    public void TakeHitDamage(float damage)
+    {
+        curhp -= damage;
     }
 }

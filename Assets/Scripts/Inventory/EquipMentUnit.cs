@@ -14,6 +14,13 @@ public class EquipMentUnit : MonoBehaviour
 
     ItemData data;
 
+    public bool CheckItem()
+    {
+        if (equipItem != null)
+            return false;
+        else
+            return true;
+    }
 
     public void AddItem(InventoryItem inventoryItem)
     {

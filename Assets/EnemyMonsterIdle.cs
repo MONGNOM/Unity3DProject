@@ -38,7 +38,6 @@ public class EnemyMonsterIdle : StateMachineBehaviour
             if (null != target)
             {
                 animator.SetTrigger("Move");
-                Debug.Log("팀몬스터를 찾았다");
                 enemy.transform.LookAt(target.transform.position);
                 enemy.agent.destination = target.transform.position;
                 break;
@@ -46,7 +45,6 @@ public class EnemyMonsterIdle : StateMachineBehaviour
             else if (null != playerController)
             {
                 animator.SetTrigger("Move");
-                Debug.Log("플레이어 를 찾았다");
                 enemy.agent.destination = playerController.transform.position;
                 enemy.transform.LookAt(playerController.transform.position);
                 break;
@@ -54,7 +52,6 @@ public class EnemyMonsterIdle : StateMachineBehaviour
             else if (null != myTower)
             {
                 animator.SetTrigger("Move");
-                Debug.Log("팀타워 를 찾았다");
                 enemy.agent.destination = myTower.transform.position;
                 enemy.transform.LookAt(myTower.transform.position);
                 break;

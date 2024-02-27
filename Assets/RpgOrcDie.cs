@@ -14,6 +14,13 @@ public class RpgOrcDie : StateMachineBehaviour
     [SerializeField]
     private BoxCollider box;
 
+    [SerializeField]
+    private int undermineral;
+
+    [SerializeField]
+    private int overmineral;
+
+
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -30,12 +37,9 @@ public class RpgOrcDie : StateMachineBehaviour
         {
             Destroy(animator.gameObject);
             PlayerStatusManager.Instance.ExpUp(monsterexp);
-            Debug.Log(monsterexp + "경험치를 얻습니다");
-            SpawnManager.Instance.GainMineral(Random.Range(1, 50));
-            Debug.Log(monsterexp + "금화를 얻습니다.");
+            SpawnManager.Instance.GainMineral(Random.Range(undermineral,overmineral));
         }
         
-        Debug.Log("집가는 문");
         ParticleSystem particle = GameObject.Find("GoHome").GetComponent<ParticleSystem>();
         BoxCollider box = GameObject.Find("GoHome").GetComponent<BoxCollider>();
         particle.Play();

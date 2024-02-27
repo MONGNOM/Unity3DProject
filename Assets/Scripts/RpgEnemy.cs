@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class RpgEnemy : MonoBehaviour
+public class RpgEnemy : MonoBehaviour,IDamageable
 {
 
     public NavMeshAgent agent;
@@ -15,10 +14,9 @@ public class RpgEnemy : MonoBehaviour
 
 
     [SerializeField]
-    private float attackRange;
+    private float attackRange;  
 
-    [SerializeField]
-    private float damage;
+    public float damage;
 
 
     [SerializeField]
@@ -29,7 +27,7 @@ public class RpgEnemy : MonoBehaviour
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInParent<Animator>();
         curHp = maxHp;
     }
     private void Start()
@@ -39,6 +37,8 @@ public class RpgEnemy : MonoBehaviour
     {
         if (curHp <= 0)
             Die();
+
+        anim.SetFloat("curHp", curHp); // 보스 체력을 읽어주는 것 같은데 뭐지
     }
 
     public void OnAttackHit()
@@ -65,5 +65,19 @@ public class RpgEnemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(gameObject.transform.position, attackRange);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "SwordWave")
+        {
+            Debug.Log("검기데미지들어옴");
+            swordwave sword = other.GetComponent<swordwave>();
+            curHp -= sword.damage;
+        }
+    }
+
+    public void TakeHitDamage(float damage)
+    {
+        curHp -= damage;
     }
 }
